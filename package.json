@@ -1,7 +1,7 @@
 {
     "name": "angular2-boiler-plate",
     "version": "1.0.0",
-    "description": "Angular 2 Boiler Plate that integrated with WebPack, TypeScript, DatePicker, RxJs for Reactive Extensions in Java Script  , Karma , Jasmine for unit testing , PhantomJS WebKit ,protractor e2e testing",
+    "description": "Angular 2 Boiler plate that integrated with WebPack, TypeScript, DatePicker, RxJs for Reactive Extensions in Java Script  , Karma , Jasmine for unit testing , PhantomJS WebKit ,protractor e2e testing",
     "scripts": {
         "start": "webpack-dev-server --inline --progress --port 3000",
         "test": "karma start",
