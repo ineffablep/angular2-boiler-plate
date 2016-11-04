@@ -1,0 +1,108 @@
+// Color variables (appears count calculates by raw css)
+@color0: #009688; // Appears 6 times
+@color1: #000000; // Appears 3 times
+@color2: #aaaaaa; // Appears 2 times
+
+// Width variables (appears count calculates by raw css)
+@width1: 100%; // Appears 2 times
+@width2: 24px; // Appears 2 times
+
+// Height variables (appears count calculates by raw css)
+@height0: 24px; // Appears 2 times
+
+input[type=checkbox].sui-check {
+	height: @height0;
+	position: relative;
+	top: 6px;
+	width: @width2;
+	&:checked+.sui-validate {
+		color: @color0;
+	}
+	&:disabled+.sui-validate {
+		color: @color2;
+	}
+}
+input[type=radio].sui-radio {
+	height: @height0;
+	position: relative;
+	top: 6px;
+	width: @width2;
+	&:checked+.sui-validate {
+		color: @color0;
+	}
+	&:disabled+.sui-validate {
+		color: @color2;
+	}
+}
+.sui-input-group {
+	margin-bottom: 24px;
+	margin-top: 24px;
+}
+.sui-group {
+	margin-bottom: 24px;
+	margin-top: 24px;
+}
+.sui-input {
+	border-bottom: 1px solid #808080;
+	border: none;
+	display: block;
+	padding: 8px;
+	width: @width1;
+	&:not( {
+		valid)~.sui-validate {
+			color: #f44336;
+		}
+	}
+}
+.sui-label {
+	color: @color0;
+}
+.sui-select {
+	border-bottom: 1px solid @color0;
+	border: 1px solid transparent;
+	color: @color1;
+	padding: 9px 0;
+	width: @width1;
+	select {
+		&:focus {
+			border: 1px solid @color0;
+			color: @color1;
+		}
+	}
+	option[disabled] {
+		color: @color0;
+	}
+}
+.sui-dropdown-click {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+}
+.sui-dropdown-hover {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	&:hover {
+		.sui-dropdown-content {
+			display: block;
+			z-index: 1;
+		}
+	}
+}
+.sui-dropdown-content {
+	background-color: #ffffff;
+	color: @color1;
+	cursor: auto;
+	display: none;
+	margin: 0;
+	min-width: 160px;
+	padding: 0;
+	position: absolute;
+	a {
+		display: block;
+		padding: 6px 16px;
+		&:hover {
+			background-color: #cccccc;
+		}
+	}
+}
