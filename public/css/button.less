@@ -1,13 +1,9 @@
-// Color variables (appears count calculates by raw css)
-@color0: #000000; // Appears 6 times
-@color1: #ffffff; // Appears 4 times
-
-
+@import 'variables.less';
 
 .sui-btn {
-	background-color: @color0;
+	background-color: @btn-bg-color;
 	border: none;
-	color: @color1;
+	color: @btn-color;
 	cursor: pointer;
 	display: inline-block;
 	outline: 0;
@@ -18,19 +14,32 @@
 	vertical-align: middle;
 	white-space: nowrap;
 }
+
+.sui-btn-success {
+	.sui-btn ;
+	background-color: @success;
+	color:@white;
+}
+.sui-btn-info {
+	.sui-btn ;
+	background-color: @info;
+	color:@white;
+}
+.sui-btn-danger {
+	.sui-btn ;
+	background-color: @danger;
+	color:@white;
+}
+
+.sui-btn-theme {
+	.sui-btn ;
+	background-color: @theme;
+	color:@white;
+}
+
+
 .sui-btn-block {
-	background-color: @color0;
-	border: none;
-	color: @color1;
-	cursor: pointer;
-	display: inline-block;
-	outline: 0;
-	overflow: hidden;
-	padding: 6px 16px;
-	text-align: center;
-	text-decoration: none!important;
-	vertical-align: middle;
-	white-space: nowrap;
+	.sui-btn;
 	width: 100%;
 }
 .sui-btn:hover, .sui-btn-block:hover, .sui-btn-floating:hover, .sui-btn-floating-large:hover  {
@@ -44,38 +53,77 @@
 	-webkit-user-select: none;
 	user-select: none;
 }
-.sui-btn-floating {
-	background-color: @color0;
+.sui-floating {
+	background-color: @btn-bg-color;
 	border-radius: 50%;
-	color: @color1;
+	color: @btn-color;
 	cursor: pointer;
 	display: inline-block;
 	font-size: 24px;
+	overflow: hidden;
+	padding: 0;
+	position: relative;
+	text-align: center;
+	z-index: 1;
+}
+.sui-btn-floating {
+	.sui-floating;
 	height: 40px;
 	line-height: 40px;
-	overflow: hidden;
-	padding: 0;
-	position: relative;
-	text-align: center;
 	width: 40px;
-	z-index: 1;
 }
 .sui-btn-floating-large {
-	background-color: @color0;
-	border-radius: 50%;
-	color: @color1;
-	cursor: pointer;
-	display: inline-block;
-	font-size: 24px;
+	.sui-floating;
 	height: 56px;
 	line-height: 56px;
-	overflow: hidden;
-	padding: 0;
-	position: relative;
-	text-align: center;
 	width: 56px;
-	z-index: 1;
 }
+
+.sui-btn-floating-success {
+	.sui-btn-floating ;
+	background-color: @success;
+	color:@white;
+}
+.sui-btn-floating-info {
+	.sui-btn-floating ;
+	background-color: @info;
+	color:@white;
+}
+.sui-btn-floating-danger {
+	.sui-btn-floating;
+	background-color: @danger;
+	color:@white;
+}
+
+.sui-btn-floating-theme {
+	.sui-btn-floating ;
+	background-color: @theme;
+	color:@white;
+}
+
+
+.sui-btn-floating-success-large {
+	.sui-btn-floating-large;
+	background-color: @success;
+	color:@white;
+}
+.sui-btn-floating-info-large {
+	.sui-btn-floating-large;
+	background-color: @info;
+	color:@white;
+}
+.sui-btn-floating-danger-large {
+	.sui-btn-floating-large;
+	background-color: @danger;
+	color:@white;
+}
+
+.sui-btn-floating-theme-large {
+	.sui-btn-floating-large;
+	background-color: @theme;
+	color:@white;
+}
+
 .sui-disabled, .sui-btn:disabled, .sui-btn-floating:disabled, .sui-btn-floating-large:disabled  {
 	cursor: not-allowed;
 	opacity: 0.3;
@@ -98,7 +146,7 @@
 		color: inherit;
 		float: left;
 		&:hover {
-			background-color: #cccccc;
+			background-color: @hover;
 		}
 	}
 }
@@ -109,12 +157,12 @@
 	font-weight: bold;
 	text-decoration: none;
 	&:hover {
-		color: @color0;
+		color: @btn-bg-color;
 		cursor: pointer;
 		text-decoration: none;
 	}
 	&:focus {
-		color: @color0;
+		color: @btn-bg-color;
 		cursor: pointer;
 		text-decoration: none;
 	}

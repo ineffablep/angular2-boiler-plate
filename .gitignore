@@ -1,3 +1,6 @@
+#css as we use less
+/public/*.css
+
 # Logs
 logs
 *.log

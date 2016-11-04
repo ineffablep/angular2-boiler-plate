@@ -1,0 +1,72 @@
+.sui-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: table;
+  width: 100%;
+}
+.sui-table-all {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #dddddd;
+  display: table;
+  width: 100%;
+}
+.sui-table-all tr {
+  border-bottom: 1px solid #dddddd;
+}
+.sui-table-all tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+.sui-table-all tr:nth-child(even) {
+  background-color: #f1f1f1;
+}
+.sui-bordered tr {
+  border-bottom: 1px solid #dddddd;
+}
+.sui-striped tbody tr:nth-child(even) {
+  background-color: #f1f1f1;
+}
+.sui-hoverable tbody tr:hover {
+  background-color: #cccccc;
+}
+.sui-ul.sui-hoverable li:hover {
+  background-color: #cccccc;
+}
+.sui-centered tr th {
+  text-align: center;
+}
+.sui-centered tr td {
+  text-align: center;
+}
+.sui-table td,
+.sui-table th,
+.sui-table-all td,
+.sui-table-all th {
+  display: table-cell;
+  padding: 8px 8px;
+  text-align: left;
+  vertical-align: top;
+}
+.sui-table th:first-child,
+.sui-table td:first-child,
+.sui-table-all th:first-child,
+.sui-table-all td:first-child {
+  padding-left: 16px;
+}
+.sui-pagination {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+.sui-pagination li {
+  display: inline;
+}
+.sui-pagination li a {
+  color: #000000;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+.sui-pagination li a:hover {
+  background-color: #cccccc;
+}

@@ -1,136 +1,132 @@
+@import 'variables.less';
+
+
 ul.sui-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	li {
+		border-bottom: 1px solid @border;
+		padding: 6px 2px 6px 16px;
+		&:last-child {
+			border-bottom: none;
+		}
+	}
 }
-
-ul.sui-ul li {
-    padding: 6px 2px 6px 16px;
-    border-bottom: 1px solid #ddd
-}
-
-ul.sui-ul li:last-child {
-    border-bottom: none
-}
-
 .sui-navbar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden
+	list-style-type: none;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	li {
+		float: left;
+		a {
+			display: block;
+			padding: 8px 16px;
+			&:hover {
+				background-color: @hover;
+				color: @fg-color;
+			}
+		}
+	}
+	.sui-dropdown-hover {
+		position: static;
+		&:hover {
+			background-color: @hover;
+			color: @fg-color;
+		}
+		&:first-child {
+			background-color: @hover;
+			color: @fg-color;
+		}
+	}
+	.sui-dropdown-click {
+		position: static;
+		&:hover {
+			background-color: @hover;
+			color: @fg-color;
+		}
+	}
+	.sui-opennav.sui-right {
+		float: right!important;
+	}
 }
-
-.sui-navbar li {
-    float: left
-}
-
-.sui-navbar li a,
 .sui-navitem {
-    display: block;
-    padding: 8px 16px
+	display: block;
+	padding: 8px 16px;
 }
-
-.sui-navbar li a:hover {
-    color: #000;
-    background-color: #ccc
+.sui-navbar a, .sui-topnav a, .sui-sidenav a, .sui-dropdown-content a, .sui-accordion-content a, .sui-dropnav a  {
+	text-decoration: none!important;
 }
-
-.sui-navbar .sui-dropdown-hover,
-.sui-navbar .sui-dropdown-click {
-    position: static
-}
-
-.sui-navbar .sui-dropdown-hover:hover,
-.sui-navbar .sui-dropdown-hover:first-child,
-.sui-navbar .sui-dropdown-click:hover {
-    background-color: #ccc;
-    color: #000
-}
-
-.sui-navbar a,
-.sui-topnav a,
-.sui-sidenav a,
-.sui-dropdown-content a,
-.sui-accordion-content a,
-.sui-dropnav a {
-    text-decoration: none!important
-}
-
-.sui-navbar .sui-opennav.sui-right {
-    float: right!important
-}
-
 .sui-topnav {
-    padding: 8px 8px
+	padding: 8px 8px;
+	a {
+		-webkit-transition: border-bottom .3s;
+		border-bottom: 3px solid transparent;
+		padding: 0 8px;
+		transition: border-bottom .3s;
+		&:hover {
+			border-bottom: 3px solid @bg-color;
+		}
+	}
+	.sui-dropdown-hover {
+		a {
+			border-bottom: 0;
+		}
+	}
 }
-
-.sui-topnav a {
-    padding: 0 8px;
-    border-bottom: 3px solid transparent;
-    -webkit-transition: border-bottom .3s;
-    transition: border-bottom .3s
+.sui-opennav {
+	color: inherit;
+	&:hover {
+		cursor: pointer;
+		opacity: 0.8;
+	}
 }
-
-.sui-topnav a:hover {
-    border-bottom: 3px solid #fff
-}
-
-.sui-topnav .sui-dropdown-hover a {
-    border-bottom: 0
-}
-
-.sui-opennav,
 .sui-closenav {
-    color: inherit
+	color: inherit;
+	&:hover {
+		cursor: pointer;
+		opacity: 0.8;
+	}
 }
-
-.sui-opennav:hover,
-.sui-closenav:hover {
-    cursor: pointer;
-    opacity: 0.8
-}
-
 .sui-sidenav {
-    height: 100%;
-    width: 200px;
-    background-color: #fff;
-    position: fixed!important;
-    z-index: 1;
-    overflow: auto
+	background-color: @bg-color;
+	height: 100%;
+	overflow: auto;
+	position: fixed!important;
+	width: 200px;
+	z-index: 1;
+	a {
+		display: block;
+		padding: 4px 2px 4px 16px;
+		&:hover {
+			background-color: @hover;
+		}
+	}
+	.sui-dropdown-hover {
+		width: 100%;
+		.sui-dropdown-content {
+			min-width: 100%;
+		}
+	}
+	.sui-dropdown-click {
+		width: 100%;
+		.sui-dropdown-content {
+			min-width: 100%;
+		}
+	}
+}
+.sui-dropnav {
+	a {
+		display: block;
+	}
+}
+.sui-sidenav .sui-dropdown-hover:hover, .sui-sidenav .sui-dropdown-hover:first-child, .sui-sidenav .sui-dropdown-click:hover, .sui-dropnav a:hover  {
+	background-color: @hover;
+	color: @fg-color;
 }
 
-.sui-sidenav a {
-    padding: 4px 2px 4px 16px
-}
-
-.sui-sidenav a:hover {
-    background-color: #ccc
-}
-
-.sui-sidenav a,
-.sui-dropnav a {
-    display: block
-}
-
-.sui-sidenav .sui-dropdown-hover:hover,
-.sui-sidenav .sui-dropdown-hover:first-child,
-.sui-sidenav .sui-dropdown-click:hover,
-.sui-dropnav a:hover {
-    background-color: #ccc;
-    color: #000
-}
-
-.sui-sidenav .sui-dropdown-hover,
-.sui-sidenav .sui-dropdown-click {
-    width: 100%
-}
-
-.sui-sidenav .sui-dropdown-hover .sui-dropdown-content,
-.sui-sidenav .sui-dropdown-click .sui-dropdown-content {
-    min-width: 100%
-}
-
-@media screen and (max-width:600px) {
+@media @mobile {
     .sui-topnav a {
         display: block
     }
@@ -143,7 +139,7 @@ ul.sui-ul li:last-child {
     }
 }
 
-@media screen and (max-width:600px) {
+@media @mobile {
     .sui-topnav .sui-dropdown-hover .sui-dropdown-content,
     .sui-navbar .sui-dropdown-click .sui-dropdown-content,
     .sui-navbar .sui-dropdown-hover .sui-dropdown-content {
@@ -151,20 +147,26 @@ ul.sui-ul li:last-child {
     }
 }
 
-@media screen and (max-width:600px) {
+@media @mobile {
     .sui-topnav,
     .sui-navbar {
         text-align: center
     }
 }
 
-@media screen and (max-width:992px) {
+@media @tablet {
     .sui-sidenav.sui-collapse {
         display: none
     }
 }
 
-@media screen and (min-width:993px) {
+@media @desktop {
+    .sui-sidenav.sui-collapse {
+        display: block!important
+    }
+}
+
+@media @desktop-xl {
     .sui-sidenav.sui-collapse {
         display: block!important
     }

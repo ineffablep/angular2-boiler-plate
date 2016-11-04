@@ -1,0 +1,12 @@
+.sui-progress-container {
+  width: 100%;
+  height: 1.5em;
+  position: relative;
+  background-color: #f1f1f1;
+}
+.sui-progressbar {
+  background-color: #009688;
+  height: 100%;
+  position: absolute;
+  line-height: inherit;
+}

@@ -1,3 +1,5 @@
+@import 'mixin.less';
+
 .sui-content {
     max-width: 980px;
     margin: auto
@@ -80,7 +82,7 @@
     width: 99.99999%
 }
 
-@media only screen and (min-width:601px) {
+@media @tablet {
     .sui-col.m1 {
         width: 8.33333%
     }
@@ -124,7 +126,7 @@
     }
 }
 
-@media only screen and (min-width:993px) {
+@media @desktop {
     .sui-col.l1 {
         width: 8.33333%
     }
@@ -164,6 +166,50 @@
         width: 91.66666%
     }
     .sui-col.l12 {
+        width: 99.99999%
+    }
+}
+
+@media @desktop-xl {
+    .sui-col.xl1 {
+        width: 8.33333%
+    }
+    .sui-col.xl2 {
+        width: 16.66666%
+    }
+    .sui-col.xl3,
+    .sui-quarter {
+        width: 24.99999%
+    }
+    .sui-col.xl4,
+    .sui-third {
+        width: 33.33333%
+    }
+    .sui-col.xl5 {
+        width: 41.66666%
+    }
+    .sui-col.xl6,
+    .sui-half {
+        width: 49.99999%
+    }
+    .sui-col.xl7 {
+        width: 58.33333%
+    }
+    .sui-col.xl8,
+    .sui-twothird {
+        width: 66.66666%
+    }
+    .sui-col.xl9,
+    .sui-threequarter {
+        width: 74.99999%
+    }
+    .sui-col.xl10 {
+        width: 83.33333%
+    }
+    .sui-col.xl11 {
+        width: 91.66666%
+    }
+    .sui-col.xl12 {
         width: 99.99999%
     }
 }

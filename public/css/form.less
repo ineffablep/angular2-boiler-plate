@@ -1,37 +1,27 @@
-// Color variables (appears count calculates by raw css)
-@color0: #009688; // Appears 6 times
-@color1: #000000; // Appears 3 times
-@color2: #aaaaaa; // Appears 2 times
-
-// Width variables (appears count calculates by raw css)
-@width1: 100%; // Appears 2 times
-@width2: 24px; // Appears 2 times
-
-// Height variables (appears count calculates by raw css)
-@height0: 24px; // Appears 2 times
+@import 'variables.less';
 
 input[type=checkbox].sui-check {
-	height: @height0;
+	height: @check-size;
 	position: relative;
 	top: 6px;
-	width: @width2;
+	width: @check-size;
 	&:checked+.sui-validate {
-		color: @color0;
+		color: @selected-color;
 	}
 	&:disabled+.sui-validate {
-		color: @color2;
+		color: @disabled;
 	}
 }
 input[type=radio].sui-radio {
-	height: @height0;
+	height: @check-size;
 	position: relative;
 	top: 6px;
-	width: @width2;
+	width: @check-size;
 	&:checked+.sui-validate {
-		color: @color0;
+		color: @selected-color;
 	}
 	&:disabled+.sui-validate {
-		color: @color2;
+		color: @disabled;
 	}
 }
 .sui-input-group {
@@ -43,34 +33,25 @@ input[type=radio].sui-radio {
 	margin-top: 24px;
 }
 .sui-input {
-	border-bottom: 1px solid #808080;
+	border-bottom: 1px solid @border;
 	border: none;
 	display: block;
 	padding: 8px;
-	width: @width1;
-	&:not( {
-		valid)~.sui-validate {
-			color: #f44336;
-		}
-	}
 }
-.sui-label {
-	color: @color0;
-}
+.sui-label{color:@label-color}.sui-input:not(:valid)~.sui-validate{color:@danger}
 .sui-select {
-	border-bottom: 1px solid @color0;
+	border-bottom: 1px solid @selected-color;
 	border: 1px solid transparent;
-	color: @color1;
+	color: @fg-color;
 	padding: 9px 0;
-	width: @width1;
 	select {
 		&:focus {
-			border: 1px solid @color0;
-			color: @color1;
+			border: 1px solid @selected-color;
+			color: @fg-color;
 		}
 	}
 	option[disabled] {
-		color: @color0;
+		color: @selected-color;
 	}
 }
 .sui-dropdown-click {
@@ -90,8 +71,8 @@ input[type=radio].sui-radio {
 	}
 }
 .sui-dropdown-content {
-	background-color: #ffffff;
-	color: @color1;
+	background-color: @bg-color;
+	color: @fg-color;
 	cursor: auto;
 	display: none;
 	margin: 0;
@@ -102,7 +83,7 @@ input[type=radio].sui-radio {
 		display: block;
 		padding: 6px 16px;
 		&:hover {
-			background-color: #cccccc;
+			background-color: @hover;
 		}
 	}
 }
