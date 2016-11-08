@@ -10,15 +10,23 @@ export class TableComponent {
     listFilter: string;
 
     constructor() {
-        
+
+    }
+    getData() {
+        if (this.tableModel.data && this.tableModel.data.length) {
+            return this.tableModel.data;
+        } else if (this.tableModel.getUrl) {
+            return []; // TODO: replace with http server request
+        }
+        return [];
     }
     getTableStyles() {
-        return this.tableModel.Style;
+        return this.tableModel.style;
     }
     getTableClasses() {
-        return this.tableModel.CssClass;
+        return this.tableModel.cssClass;
     }
     getColumns() {
-        return this.tableModel.Columns;
+        return this.tableModel.columns;
     }
 }

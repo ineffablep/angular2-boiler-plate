@@ -1,55 +1,75 @@
 export enum EnumFieldType {
-    String, Number, Date, DateTime, Boolean, Select
+    String, Number, Date, DateTime, Boolean, Select, Currency, Image , Email , Phone
 }
 export enum EnumEditType {
-    RowEdit,CellEdit,DialogEdit,FormEdit,None
+    RowEdit, CellEdit, DialogEdit, FormEdit, None
 }
 export interface IColumnModel {
-    FieldName: string;
-    DisplayName: string;
-    Hidden: boolean;
-    CanEdit: boolean;
-    CanDelete: boolean;
-    CanAdd: boolean;
-    CanFilter: boolean;
-    CanSort: boolean;
-    CanGroup: boolean;
-    IdentityField:boolean;
-    CssClass: Object;
-    Style: Object;
-    FieldType: EnumFieldType
+    fieldName: string;
+    displayName: string;
+    hidden: boolean;
+    canEdit: boolean;
+    canDelete: boolean;
+    canAdd: boolean;
+    canFilter: boolean;
+    canSort: boolean;
+    canExport: boolean;
+    identityField: boolean;
+    cssClass: Object;
+    style: Object;
+    fieldType: EnumFieldType;
 }
 export interface ITableModel {
-    CssClass: Object;
-    Style: Object;
-    GetUrl?: string;
-    EditUrl?: string;
-    AddUrl?: string;
-    DeleteUrl?: string;
-    Columns:IColumnModel[];
-    Data:any;
-    ShowSearch:boolean;
-    EditType:EnumEditType;
+    cssClass: Object;
+    style: Object;
+    getUrl?: string;
+    updateUrl?: string;
+    insertUrl?: string;
+    deleteUrl?: string;
+    columns: IColumnModel[];
+    data: any;
+    enableQuickFilterBy: boolean;
+    enablePaging: boolean;
+    enableSorting: boolean;
+    enableFiltering: boolean;
+    enableExport: boolean;
+    editType: EnumEditType;
+    enableServerSideFiltering: boolean;
+    enableServerSideSorting: boolean;
+    enableServerSideQuickFilterBy: boolean;
+    enableServerSidePaging: boolean;
+    enableServerSideExport: boolean;
 }
 
 export class TableModel implements ITableModel {
-    public ShowSearch:boolean=true;
-    public CssClass:string="sui-table-all";
-    public Style:Object={};
-    public  EditType:EnumEditType=EnumEditType.FormEdit;
-    constructor(public Columns:IColumnModel[]=[], public Data:any=[]) {}
+    public enableQuickFilterBy: boolean = true;
+    public enablePaging: boolean = true;
+    public enableSorting: boolean = true;
+    public enableFiltering: boolean = true;
+    public enableExport: boolean = true;
+    public enableServerSideFiltering: boolean = false;
+    public enableServerSideSorting: boolean = false;
+    public enableServerSideQuickFilterBy: boolean = false;
+    public enableServerSidePaging: boolean = false;
+    public enableServerSideExport: boolean = false;
+    public cssClass: string = 'sui-table-all';
+    public style: Object = {};
+    public editType: EnumEditType = EnumEditType.FormEdit;
+    constructor(public columns: IColumnModel[] = [], public data: any = []) { }
 }
 
 export class ColumnModel implements IColumnModel {
-    public Hidden: boolean=false;
-    public CanEdit: boolean=true;
-    public CanDelete: boolean=true;
-    public CanAdd: boolean=true;
-    public CanFilter: boolean=true;
-    public CanSort: boolean=true;
-    public CanGroup: boolean=true;
-    public IdentityField:boolean=false;
-    public Style:Object={};
-    public CssClass:Object={};
-    constructor(public FieldName:string,public DisplayName:string,public FieldType: EnumFieldType=EnumFieldType.String ){}
+    public hidden: boolean = false;
+    public canEdit: boolean = true;
+    public canDelete: boolean = true;
+    public canAdd: boolean = true;
+    public canFilter: boolean = true;
+    public canSort: boolean = true;
+    public canExport: boolean = true;
+    public identityField: boolean = false;
+    public style: Object = {};
+    public cssClass: Object = {};
+    constructor(public fieldName: string,
+        public displayName: string,
+        public fieldType: EnumFieldType = EnumFieldType.String) { }
 }

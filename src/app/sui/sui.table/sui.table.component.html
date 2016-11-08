@@ -1,11 +1,11 @@
 <div class="sui-container" *ngIf="tableModel">
-    <div class='sui-row sui-padding-4' *ngIf="tableModel.ShowSearch ">
-        <input [(ngModel)]='listFilter' class="sui-input sui-border" placeholder="Search ..." type="text" style="width:30%">
+    <div class='sui-row sui-padding-4' *ngIf="tableModel.enableQuickFilterBy ">
+        <input [(ngModel)]='listFilter' class="sui-input sui-border" placeholder="Filter by ..." type="text" style="width:30%">
     </div>
     <table [ngClass]="getTableClasses() " [ngStyle]="getTableStyles() ">
         <thead>
             <tr>
-                <th *ngFor="let column of getColumns() "> {{column.DisplayName}} </th>
+                <th *ngFor="let column of getColumns() "> {{column.displayName}} </th>
             </tr>
         </thead>
         <tbody>
