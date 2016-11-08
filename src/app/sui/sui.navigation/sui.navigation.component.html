@@ -1,0 +1,17 @@
+<ul class="sui-navbar sui-hide-mobile sui-hide-tablet sui-left-align">
+    <li *ngFor="let item of nav.links">
+        <a routerLink="{{item.routerLink}}" routerLinkActive="active">{{item.displayName}}</a>
+    </li>
+</ul>
+<div class="sui-hide-desktop-xl sui-hide-desktop">
+    <ul class="sui-navbar">
+        <li class="sui-opennav sui-right">
+            <a href="javascript:void(0); " (click)="onBarsClicked() ">☰</a>
+        </li>
+    </ul>
+</div>
+<ul *ngIf="showSmallMenu" class="sui-navbar sui-left-align sui-large ">
+    <li *ngFor="let item of nav.links">
+        <a routerLink="{{item.routerLink}}" routerLinkActive="active">{{item.displayName}}</a>
+    </li>
+</ul>

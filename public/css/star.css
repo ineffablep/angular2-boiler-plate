@@ -1,0 +1,68 @@
+span.sui-rating {
+  cursor: pointer;
+  outline: none;
+  font-size: 34px;
+}
+span.sui-rating.readonly {
+  cursor: default;
+}
+span.sui-rating.disabled {
+  cursor: not-allowed;
+}
+span.sui-rating i {
+  font-style: normal;
+}
+.sui-star-icon {
+  color: #ECECEC;
+  font-size: 2em;
+  position: relative;
+}
+.sui-star-icon:before {
+  color: #FFED85;
+  content: attr(data-icon) " ";
+  position: absolute;
+  left: 0;
+  overflow: hidden;
+  width: 0;
+}
+span.sui-rating.disabled .sui-star-icon:before {
+  color: #ECECEC;
+  text-shadow: none;
+}
+.sui-star-icon.half10:before {
+  width: 10%;
+}
+.sui-star-icon.half20:before {
+  width: 20%;
+}
+.sui-star-icon.half30:before {
+  width: 30%;
+}
+.sui-star-icon.half40:before {
+  width: 40%;
+}
+.sui-star-icon.half50:before {
+  width: 50%;
+}
+.sui-star-icon.half60:before {
+  width: 60%;
+}
+.sui-star-icon.half70:before {
+  width: 70%;
+}
+.sui-star-icon.half80:before {
+  width: 80%;
+}
+.sui-star-icon.half90:before {
+  width: 90%;
+}
+.sui-star-icon.half100:before {
+  width: 100%;
+}
+@-moz-document url-prefix() {
+  /* Firefox Hack */
+  .sui-star-icon {
+    font-size: 50px;
+    line-height: 34px;
+  }
+}

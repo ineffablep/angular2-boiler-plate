@@ -1,0 +1,46 @@
+<div class="sui-container">
+    <h2> regular sui-rating </h2>
+    <sui-rating [(ngModel)]="starsCount"></sui-rating>
+    <br/><br/>
+    <h2> sui-rating with 10 stars </h2>
+    <sui-rating [(ngModel)]="starsCount" [max]="10">
+    </sui-rating>
+    <br/><br/>
+
+    <h2> sui-rating with custom icons </h2>
+    <sui-rating [(ngModel)]="starsCount" fullIcon="◆" emptyIcon="◇">
+    </sui-rating>
+    <br/><br/>
+
+    <h2>sui-rating readonly </h2>
+    <sui-rating [(ngModel)]="starsCount" [readonly]="true">
+    </sui-rating>
+    <br/><br/>
+
+    <h2>sui-rating disabled </h2>
+    <sui-rating [(ngModel)]="starsCount" [disabled]="true">
+    </sui-rating>
+    <br/><br/>
+
+    <h2>sui-rating required </h2>
+    <sui-rating [(ngModel)]="starsCount" [required]="true">
+    </sui-rating>
+    <br/><br/>
+
+    <h2>sui-rating with half stars </h2>
+    <sui-rating [(ngModel)]="starsCount" [float]="true">
+    </sui-rating>
+    <br/><br/>
+
+    <h2>sui-rating with custom titles </h2>
+    <sui-rating [(ngModel)]="starsCount" [titles]="['one', 'two', 'three', 'four', 'five']">
+    </sui-rating>
+    <br/><br/>
+
+    <h2>example in ngFor </h2>
+    <div *ngFor="let item of [1, 2, 3]; let index = index">
+        <sui-rating [(ngModel)]="starsCounts[index]" [float]="true">
+        </sui-rating>
+        <br/><br/>
+    </div>
+</div>

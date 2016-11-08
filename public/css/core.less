@@ -1,13 +1,5 @@
 @import 'variables.less';
-.sui-border {
-	border: 1px solid @border!important;
-}
-.sui-panel
-{
-	padding:0.01em 16px;
-	margin-top:16px!important;
-	margin-bottom:16px!important
-}
+
 .sui-btn, .sui-btn-floating, .sui-btn-floating-large, .sui-btn-block, .sui-hover-shadow, .sui-hover-opacity, .sui-hover-opacity-off, .sui-closebtn, .sui-hover-sepia, .sui-hover-grayscale, .sui-hover-greyscale, .sui-dropnav a, .sui-navbar a, .sui-sidenav a, .sui-pagination li a, .sui-hoverable tbody tr, .sui-hoverable li, .sui-accordion-content a, .sui-dropdown-content a, .sui-dropdown-click:hover, .sui-dropdown-hover:hover, .sui-opennav, .sui-closenav, .sui-ripple:active  {
 	opacity: 0.5;
 }
@@ -153,7 +145,9 @@
 .sui-show-inline-block {
     display: inline-block!important
 }
-
+@media (max-width:600px){.sui-hide-small{display:none!important}}
+@media (min-width:601px) and (max-width:992px)  {.sui-hide-medium{display:none!important}}
+@media (min-width:993px){.sui-hide-large{display:none!important}}
 @media @mobile {
     .sui-hide-mobile {
         display: none!important
@@ -179,4 +173,11 @@
 .sui-theme{
 	background-color: @theme!important;
 	color: @white!important;
+}
+.sui-pointer {
+	 cursor: pointer;
+}
+
+.sui-overflow-hidden {
+	overflow: hidden;
 }
