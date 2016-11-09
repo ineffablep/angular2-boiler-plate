@@ -1,8 +1,12 @@
 export enum EnumFieldType {
-    String, Number, Date, DateTime, Boolean, Select, Currency, Image , Email , Phone
+    String, Number, Date, DateTime, Boolean, Select, Currency, Image, Email, Phone
 }
 export enum EnumEditType {
     RowEdit, CellEdit, DialogEdit, FormEdit, None
+}
+
+export enum EnumSortDirection {
+    Asc, DeSc, None
 }
 export interface IColumnModel {
     fieldName: string;
@@ -39,6 +43,9 @@ export interface ITableModel {
     enableServerSideQuickFilterBy: boolean;
     enableServerSidePaging: boolean;
     enableServerSideExport: boolean;
+    sortIcon: string;
+    sortDescIcon: string;
+    sortAscIcon: string;
 }
 
 export class TableModel implements ITableModel {
@@ -55,6 +62,9 @@ export class TableModel implements ITableModel {
     public cssClass: string = 'sui-table-all';
     public style: Object = {};
     public editType: EnumEditType = EnumEditType.FormEdit;
+    public sortIcon: string = 'fa fa-sort';
+    public sortDescIcon: string = 'fa fa-sort-desc';
+    public sortAscIcon: string = 'fa fa-sort-asc';
     constructor(public columns: IColumnModel[] = [], public data: any = []) { }
 }
 

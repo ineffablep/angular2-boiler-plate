@@ -31,10 +31,11 @@ input[type=radio].sui-radio:disabled + .sui-validate {
   margin-top: 24px;
 }
 .sui-input {
-  border-bottom: 1px solid #dddddd;
   border: none;
+  border-bottom: 1px solid #dddddd;
   display: block;
   padding: 8px;
+  width: 100%;
 }
 .sui-label {
   color: #009688;

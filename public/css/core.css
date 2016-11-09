@@ -213,3 +213,9 @@
 .sui-overflow-hidden {
   overflow: hidden;
 }
+.sui-left {
+  float: left;
+}
+.sui-right {
+  float: right;
+}

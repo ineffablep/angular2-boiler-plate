@@ -436,6 +436,8 @@ export class TableSampleComponent {
     ]
   }
 ];
-      return new TableModel(columns, json);
+
+    let tble = new TableModel(columns, json);
+    return tble;
   }
 }

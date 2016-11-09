@@ -20,7 +20,7 @@ import { TableSampleComponent } from './samples/sample.table/sample.table.compon
       { path: 'welcome', component: WelcomeComponent },
       { path: 'ratingsUi', component: RatingSampleComponent },
       { path: 'tableUi', component: TableSampleComponent },
-      
+
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
     ]),

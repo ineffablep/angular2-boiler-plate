@@ -492,6 +492,12 @@ legend {
 .sui-overflow-hidden {
   overflow: hidden;
 }
+.sui-left {
+  float: left;
+}
+.sui-right {
+  float: right;
+}
 .sui-content {
   max-width: 980px;
   margin: auto;
@@ -965,10 +971,11 @@ input[type=radio].sui-radio:disabled + .sui-validate {
   margin-top: 24px;
 }
 .sui-input {
-  border-bottom: 1px solid #dddddd;
   border: none;
+  border-bottom: 1px solid #dddddd;
   display: block;
   padding: 8px;
+  width: 100%;
 }
 .sui-label {
   color: #009688;
@@ -1026,6 +1033,10 @@ input[type=radio].sui-radio:disabled + .sui-validate {
   display: table;
   width: 100%;
 }
+.sui-table-container {
+  overflow: auto;
+  height: 600px;
+}
 .sui-table-all {
   border-collapse: collapse;
   border-spacing: 0;
@@ -1065,7 +1076,7 @@ input[type=radio].sui-radio:disabled + .sui-validate {
 .sui-table-all td,
 .sui-table-all th {
   display: table-cell;
-  padding: 8px 8px;
+  padding: 16px;
   text-align: left;
   vertical-align: top;
 }
@@ -1148,6 +1159,9 @@ input[type=radio].sui-radio:disabled + .sui-validate {
 }
 .sui-margin-0 {
   margin: 0 !important;
+}
+.sui-margin-left-5 {
+  margin-left: 5px !important;
 }
 .sui-margin-top {
   margin-top: 16px !important;

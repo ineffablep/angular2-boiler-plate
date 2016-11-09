@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { ITableModel } from './sui.table.model';
+import {
+    ITableModel, IColumnModel,
+    EnumFieldType, EnumEditType, EnumSortDirection
+} from './sui.table.model';
 
 @Component({
     selector: 'sui-table',
@@ -8,7 +11,8 @@ import { ITableModel } from './sui.table.model';
 export class TableComponent {
     @Input() tableModel: ITableModel;
     listFilter: string;
-
+    sortType: string= '';
+    sortReverse: false;
     constructor() {
 
     }

@@ -1,14 +1,41 @@
 <div class="sui-container" *ngIf="tableModel">
     <div class='sui-row sui-padding-4' *ngIf="tableModel.enableQuickFilterBy ">
-        <input [(ngModel)]='listFilter' class="sui-input sui-border" placeholder="Filter by ..." type="text" style="width:30%">
+        <input [(ngModel)]='listFilter' class="sui-input" placeholder="Filter by ..." type="text">
     </div>
-    <table [ngClass]="getTableClasses() " [ngStyle]="getTableStyles() ">
-        <thead>
-            <tr>
-                <th *ngFor="let column of getColumns() "> {{column.displayName}} </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr> </tr>
-        </tbody>
+    <div class="sui-table-container">
+        <table [ngClass]="getTableClasses()" [ngStyle]="getTableStyles()">
+            <thead>
+                <tr>
+                    <th *ngFor="let column of getColumns()" class="sui-pointer">
+                        <a (click)="sortType = column.fieldName; sortReverse = !sortReverse">
+                            <span class="sui-left"> {{column.displayName}} </span>
+                            <span class="sui-margin-left-5"> 
+                            <span *ngIf="sortType == column.filedName && !sortReverse">
+                                <i class="{{tableModel.sortDescIcon}}"> </i>
+                                </span>
+                            <span *ngIf="sortType == column.fieldName && sortReverse">
+                                <i class="{{tableModel.sortAscIcon}}"> </i>
+                            </span>
+                            <span *ngIf="sortType==''">
+                                <i class="{{tableModel.sortIcon}}"> </i>
+                            </span>
+                            </span>
+                        </a>
+                    </th>
+                </tr>
+                <tr *ngIf="tableModel.enableFiltering">
+                    <th *ngFor="let column of getColumns()">
+                        <input class="sui-input" type="text" *ngIf="column.canFilter" />
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of tableModel.data">
+                    <td *ngFor="let col of getColumns() | orderBy:sortType:sortReverse | filter:listFilter">
+                        {{row[col.fieldName]}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
