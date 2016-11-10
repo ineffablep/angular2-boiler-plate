@@ -1,38 +1,55 @@
 <div class="sui-container" *ngIf="tableModel">
-    <div class='sui-row sui-padding-4' *ngIf="tableModel.enableQuickFilterBy ">
-        <input [(ngModel)]='listFilter' class="sui-input" placeholder="Filter by ..." type="text">
+    <div class='sui-container sui-padding-4' *ngIf="tableModel.enableQuickFilterBy ">
+        <div class="sui-container sui-third">
+            <div class="sui-dropdown-hover">
+                <button class="sui-btn sui-theme">Choose Columns</button>
+                <div class="sui-dropdown-content sui-border">
+                    <a (click)="onColumnChooserClick(column)" class="sui-pointer" *ngFor="let column of tableModel.columns;let in=index;trackBy:trackByIndex">
+                        <i *ngIf="showColumnIcon(column)" class="fa fa-check"> </i> {{column.displayName}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="sui-container sui-twothird">
+            <input class="{{tableModel.searchInputCssClass}}" placeholder="{{tableModel.searchInputPlaceholderText}}" type="text" (keyup)="onFilterChange($event,'search')">
+        </div>
     </div>
     <div class="sui-table-container">
-        <table [ngClass]="getTableClasses()" [ngStyle]="getTableStyles()">
+        <table [ngClass]="this.tableModel.cssClass" [ngStyle]="this.tableModel.style" *ngIf="tableModel.data && tableModel.data.length">
             <thead>
                 <tr>
-                    <th *ngFor="let column of getColumns()" class="sui-pointer">
-                        <a (click)="sortType = column.fieldName; sortReverse = !sortReverse">
+                    <th *ngFor="let column of tableModel.columns | visible:hiddenFields;let in=index;trackBy:trackByIndex" [ngClass]="this.tableModel.headerCssClass"
+                        [ngStyle]="this.tableModel.headerStyle">
+                        <a (click)="onSortClick(column)" class="sui-pointer">
                             <span class="sui-left"> {{column.displayName}} </span>
-                            <span class="sui-margin-left-5"> 
-                            <span *ngIf="sortType == column.filedName && !sortReverse">
-                                <i class="{{tableModel.sortDescIcon}}"> </i>
-                                </span>
-                            <span *ngIf="sortType == column.fieldName && sortReverse">
-                                <i class="{{tableModel.sortAscIcon}}"> </i>
-                            </span>
-                            <span *ngIf="sortType==''">
-                                <i class="{{tableModel.sortIcon}}"> </i>
-                            </span>
-                            </span>
+                            <span class="sui-margin-left-5" *ngIf="column.canSort"> 
+                                    <i class="{{sortedIcon}}" *ngIf="sortModel.key == column.fieldName"> </i>
+                                    <i class="{{tableModel.sortIcon}}" *ngIf="sortModel.key != column.fieldName"> </i>
+                             </span>
                         </a>
+                        <div *ngIf="column.canFilter">
+                            <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==0" type="text" (keyup)="onFilterChange($event,column.fieldName)">
+                            <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==1" type="number" (keyup)="onFilterChange($event,column.fieldName)">
+                            <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==2" type="date" (keyup)="onFilterChange($event,column.fieldName)">
+                            <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==3" type="datetime" (keyup)="onFilterChange($event,column.fieldName)">
+                            <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==6" type="text" (keyup)="onFilterChange($event,column.fieldName)">
+                            <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==8" type="email" (keyup)="onFilterChange($event,column.fieldName)">
+                            <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==9" type="text" (keyup)="onFilterChange($event,column.fieldName)">
+                            <select class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==5 || column.fieldType==4" (change)="onFilterChange($event,column.fieldName)"> 
+                             <option *ngFor="let item of getSelectList(column);let in=index;trackBy:trackByIndex" [value]="item.key">{{item.value}}</option>
+                          </select>
+                        </div>
                     </th>
                 </tr>
-                <tr *ngIf="tableModel.enableFiltering">
-                    <th *ngFor="let column of getColumns()">
-                        <input class="sui-input" type="text" *ngIf="column.canFilter" />
-                    </th>
-                </tr>
+
             </thead>
             <tbody>
-                <tr *ngFor="let row of tableModel.data">
-                    <td *ngFor="let col of getColumns() | orderBy:sortType:sortReverse | filter:listFilter">
-                        {{row[col.fieldName]}}
+                <tr *ngFor="let row of tableModel.data | filter : filters |orderBy:sortModel; let in=index;trackBy:trackByIndex ">
+                    <td  *ngFor="let k=index;trackBy:trackByIndex;let col of tableModel.columns | visible:hiddenFields" [ngClass]="this.tableModel.rowCssClass" [ngStyle]="this.tableModel.rowStyle">
+                        <span *ngIf="col.fieldType!==4 &&col.fieldType!==7">{{row[col.fieldName]}}</span>
+                        <input class="sui-table-check" disabled type="checkbox" *ngIf="col.fieldType===4" [(ngModel)]="row[col.fieldName]" />
+                        <img src="{{row[col.fieldName]}}" *ngIf="col.fieldType===7" />
+                       
                     </td>
                 </tr>
             </tbody>

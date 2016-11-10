@@ -8,14 +8,22 @@ import { RatingComponent } from './sui.rating/sui.rating.component';
 import { TableComponent } from './sui.table/sui.table.component';
 import { FilterPipe } from './sui.util/sui.util.filter.pipe';
 import { OrderByPipe } from './sui.util/sui.util.orderBy.pipe';
+import { VisibleFilter } from './sui.util/sui.util.visible.pipe';
 
 
 @NgModule({
-    declarations: [FilterPipe,OrderByPipe, NavigationComponent, RatingComponent , TableComponent],
+    declarations: [
+        FilterPipe,
+        OrderByPipe,
+        VisibleFilter,
+        NavigationComponent,
+        RatingComponent,
+        TableComponent],
     imports: [CommonModule, RouterModule, FormsModule],
     exports: [
         CommonModule,
         FormsModule,
+        VisibleFilter,
         RouterModule,
         FilterPipe,
         OrderByPipe,

@@ -44,10 +44,10 @@ input[type=radio].sui-radio:disabled + .sui-validate {
   color: #f44336;
 }
 .sui-select {
-  border-bottom: 1px solid #009688;
   border: 1px solid transparent;
   color: #000000;
   padding: 9px 0;
+  border-bottom: 1px solid #009688;
 }
 .sui-select select:focus {
   border: 1px solid #009688;
@@ -83,7 +83,4 @@ input[type=radio].sui-radio:disabled + .sui-validate {
 .sui-dropdown-content a {
   display: block;
   padding: 6px 16px;
-}
-.sui-dropdown-content a:hover {
-  background-color: #f1f1f1;
 }

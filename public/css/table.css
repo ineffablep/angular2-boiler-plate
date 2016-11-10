@@ -50,12 +50,21 @@
   padding: 16px;
   text-align: left;
   vertical-align: top;
+  white-space: nowrap;
 }
 .sui-table th:first-child,
 .sui-table td:first-child,
 .sui-table-all th:first-child,
 .sui-table-all td:first-child {
   padding-left: 16px;
+}
+input[type=checkbox].sui-table-check {
+  height: 16px;
+  width: 16px;
+}
+.sui-table td input[type=checkbox].sui-table-check {
+  text-align: center;
+  vertical-align: middle;
 }
 .sui-pagination {
   display: inline-block;

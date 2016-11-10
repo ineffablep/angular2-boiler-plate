@@ -41,7 +41,6 @@ input[type=radio].sui-radio {
 }
 .sui-label{color:@label-color}.sui-input:not(:valid)~.sui-validate{color:@danger}
 .sui-select {
-	border-bottom: 1px solid @selected-color;
 	border: 1px solid transparent;
 	color: @fg-color;
 	padding: 9px 0;
@@ -54,6 +53,7 @@ input[type=radio].sui-radio {
 	option[disabled] {
 		color: @selected-color;
 	}
+	border-bottom: 1px solid @selected-color;
 }
 .sui-dropdown-click {
 	cursor: pointer;
@@ -83,8 +83,5 @@ input[type=radio].sui-radio {
 	a {
 		display: block;
 		padding: 6px 16px;
-		&:hover {
-			background-color: @hover;
-		}
 	}
 }

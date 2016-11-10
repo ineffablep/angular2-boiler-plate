@@ -1,37 +1,43 @@
 export enum EnumFieldType {
-    String, Number, Date, DateTime, Boolean, Select, Currency, Image, Email, Phone
+    String = 0,
+    Number = 1,
+    Date = 2,
+    DateTime = 3,
+    Boolean = 4,
+    Select = 5,
+    Currency = 6,
+    Image = 7,
+    Email = 8,
+    Phone = 9
 }
 export enum EnumEditType {
     RowEdit, CellEdit, DialogEdit, FormEdit, None
 }
-
-export enum EnumSortDirection {
-    Asc, DeSc, None
+export interface ISelectModel {
+    key: string;
+    value: string;
 }
+
 export interface IColumnModel {
     fieldName: string;
     displayName: string;
     hidden: boolean;
-    canEdit: boolean;
-    canDelete: boolean;
-    canAdd: boolean;
     canFilter: boolean;
     canSort: boolean;
     canExport: boolean;
     identityField: boolean;
-    cssClass: Object;
-    style: Object;
     fieldType: EnumFieldType;
+    autoCreateSelectListFromData: boolean;
+    selectList: SelectModel[];
 }
 export interface ITableModel {
-    cssClass: Object;
-    style: Object;
+
     getUrl?: string;
     updateUrl?: string;
     insertUrl?: string;
     deleteUrl?: string;
     columns: IColumnModel[];
-    data: any;
+    data: any[];
     enableQuickFilterBy: boolean;
     enablePaging: boolean;
     enableSorting: boolean;
@@ -46,8 +52,18 @@ export interface ITableModel {
     sortIcon: string;
     sortDescIcon: string;
     sortAscIcon: string;
-}
+    cssClass: Object;
+    headerCssClass: Object;
+    rowCssClass: Object;
+    style: Object;
+    rowStyle: Object;
+    headerStyle: Object;
 
+}
+export class SelectModel implements ISelectModel {
+    public key: string = '';
+    public value: string = '';
+}
 export class TableModel implements ITableModel {
     public enableQuickFilterBy: boolean = true;
     public enablePaging: boolean = true;
@@ -59,26 +75,30 @@ export class TableModel implements ITableModel {
     public enableServerSideQuickFilterBy: boolean = false;
     public enableServerSidePaging: boolean = false;
     public enableServerSideExport: boolean = false;
-    public cssClass: string = 'sui-table-all';
+    public cssClass: Object = 'sui-table-all';
     public style: Object = {};
+    public headerCssClass: Object = {};
+    public rowCssClass: Object = '';
+    public rowStyle: Object = {};
+    public headerStyle: Object = {};
     public editType: EnumEditType = EnumEditType.FormEdit;
     public sortIcon: string = 'fa fa-sort';
     public sortDescIcon: string = 'fa fa-sort-desc';
     public sortAscIcon: string = 'fa fa-sort-asc';
-    constructor(public columns: IColumnModel[] = [], public data: any = []) { }
+    public searchInputCssClass: string = 'sui-input';
+    public searchInputPlaceholderText: string= 'Search ...';
+    constructor(public columns: IColumnModel[] = [], public data: any[] = []) { }
 }
 
 export class ColumnModel implements IColumnModel {
     public hidden: boolean = false;
-    public canEdit: boolean = true;
-    public canDelete: boolean = true;
-    public canAdd: boolean = true;
     public canFilter: boolean = true;
     public canSort: boolean = true;
     public canExport: boolean = true;
     public identityField: boolean = false;
-    public style: Object = {};
-    public cssClass: Object = {};
+    public selectList: SelectModel[] = [];
+    public filterInputCssClass: string= 'sui-input';
+    public autoCreateSelectListFromData: boolean = true;
     constructor(public fieldName: string,
         public displayName: string,
         public fieldType: EnumFieldType = EnumFieldType.String) { }
