@@ -1,16 +1,15 @@
 import { PipeTransform, Pipe } from '@angular/core';
-import { SortModel } from './sui.util.sort.model';
 
 @Pipe({
     name: 'orderBy'
 })
 export  class OrderByPipe implements PipeTransform {
-    transform(items: any, sortModel: SortModel): any {
-        return sortArray(items, sortModel);
+    transform(items: any, key: string, descOrder: boolean): any {
+        return sortArray(items, key, descOrder);
     }
 }
 
-export function sortArray<T>(items: Array<T>, sortModel: SortModel): Array<T> {
+export function sortArray<T>(items: Array<T>, key: string, descOrder: boolean): Array<T> {
     if (!items || items.length < 2) return items;
     let len = items.length, array: T[];
     if (len > 65536) {
@@ -23,8 +22,8 @@ export function sortArray<T>(items: Array<T>, sortModel: SortModel): Array<T> {
         array[i] = items[i];
     }
     return array.sort(function (a, b) {
-        let x = a[sortModel.key];
-        let y = b[sortModel.key];
+        let x = a[key];
+        let y = b[key];
 
         if (typeof x === 'string') {
             x = x.toLowerCase();
@@ -32,7 +31,7 @@ export function sortArray<T>(items: Array<T>, sortModel: SortModel): Array<T> {
         if (typeof y === 'string') {
             y = y.toLowerCase();
         }
-        if (sortModel.descOrder)
+        if (descOrder)
         return ((x > y) ? -1 : ((x < y) ? 1 : 0));
         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
     });

@@ -1,8 +1,8 @@
 <div class="sui-container" *ngIf="tableModel">
     <div class='sui-container sui-padding-4' *ngIf="tableModel.enableQuickFilterBy ">
         <div class="sui-container sui-third">
-            <div class="sui-dropdown-hover">
-                <button class="sui-btn sui-theme">Choose Columns</button>
+            <div class="sui-dropdown-hover" *ngIf="tableModel.showColumnChooserButton">
+                <button class="{{tableModel.cssClassColumnChooser}}">{{tableModel.columnChooserText}}</button>
                 <div class="sui-dropdown-content sui-border">
                     <a (click)="onColumnChooserClick(column)" class="sui-pointer" *ngFor="let column of tableModel.columns;let in=index;trackBy:trackByIndex">
                         <i *ngIf="showColumnIcon(column)" class="fa fa-check"> </i> {{column.displayName}}
@@ -18,13 +18,12 @@
         <table [ngClass]="this.tableModel.cssClass" [ngStyle]="this.tableModel.style" *ngIf="tableModel.data && tableModel.data.length">
             <thead>
                 <tr>
-                    <th *ngFor="let column of tableModel.columns | visible:hiddenFields;let in=index;trackBy:trackByIndex" [ngClass]="this.tableModel.headerCssClass"
-                        [ngStyle]="this.tableModel.headerStyle">
+                    <th *ngFor="let column of tableModel.columns | visible:hiddenFields;let in=index;trackBy:trackByIndex" [ngClass]="this.tableModel.headerCssClass" [ngStyle]="this.tableModel.headerStyle">
                         <a (click)="onSortClick(column)" class="sui-pointer">
                             <span class="sui-left"> {{column.displayName}} </span>
                             <span class="sui-margin-left-5" *ngIf="column.canSort"> 
-                                    <i class="{{sortedIcon}}" *ngIf="sortModel.key == column.fieldName"> </i>
-                                    <i class="{{tableModel.sortIcon}}" *ngIf="sortModel.key != column.fieldName"> </i>
+                                    <i class="{{sortedIcon}}" *ngIf="sortKey == column.fieldName"> </i>
+                                    <i class="{{tableModel.sortIcon}}" *ngIf="sortKey != column.fieldName"> </i>
                              </span>
                         </a>
                         <div *ngIf="column.canFilter">
@@ -44,15 +43,25 @@
 
             </thead>
             <tbody>
-                <tr *ngFor="let row of tableModel.data | filter : filters |orderBy:sortModel; let in=index;trackBy:trackByIndex ">
-                    <td  *ngFor="let k=index;trackBy:trackByIndex;let col of tableModel.columns | visible:hiddenFields" [ngClass]="this.tableModel.rowCssClass" [ngStyle]="this.tableModel.rowStyle">
+                <tr *ngFor="let row of tableModel.data | filter : filters:filterOrCondition |orderBy:sortKey:descOrder| pagination :currentPage:pageSize; let in=index;trackBy:trackByIndex ">
+                    <td *ngFor="let k=index;trackBy:trackByIndex;let col of tableModel.columns | visible:hiddenFields" [ngClass]="this.tableModel.rowCssClass" [ngStyle]="this.tableModel.rowStyle">
                         <span *ngIf="col.fieldType!==4 &&col.fieldType!==7">{{row[col.fieldName]}}</span>
                         <input class="sui-table-check" disabled type="checkbox" *ngIf="col.fieldType===4" [(ngModel)]="row[col.fieldName]" />
                         <img src="{{row[col.fieldName]}}" *ngIf="col.fieldType===7" />
-                       
+
                     </td>
                 </tr>
             </tbody>
         </table>
+
+    </div>
+    <div class="sui-container sui-margin-top" *ngIf="tableModel.pagination.showPaging && totalPageCount>1">
+        <ul class="sui-pagination sui-border sui-round">
+            <li *ngIf="tableModel.pagination.showGoToStartArrow"><a (click)="onPageClick(1)" title="{{tableModel.pagination.toolTipGoToStart}}"><i class="{{tableModel.pagination.clsGoToStartIcon}}"> </i> </a></li>
+            <li *ngIf="tableModel.pagination.showGoToPreviousArrow"><a (click)="onPageClick(currentPage-1)" title="{{tableModel.pagination.toolTipGoToPrevious}}"><i class="{{tableModel.pagination.clsGoToPreviousPageIcon}}"> </i></a></li>
+            <li *ngFor="let item of getPages()"><a (click)="onPageClick(item)" class="{{currentPage==item ? tableModel.pagination.activePageCssClass : 'sui-pointer'}}">{{item}}</a></li>
+            <li *ngIf="tableModel.pagination.showGoToNextArrow"><a (click)="onPageClick(currentPage+1)" title="{{tableModel.pagination.toolTipGoToNext}}"><i class="{{tableModel.pagination.clsGoToNextPageIcon}}"> </i></a></li>
+            <li *ngIf="tableModel.pagination.showGoToEndArrow"><a (click)="onPageClick(totalPageCount)" title="{{tableModel.pagination.toolTipGoToEnd}}"><i class="{{tableModel.pagination.clsGoToEndIcon}}"> </i></a></li>
+        </ul>
     </div>
 </div>

@@ -1,3 +1,5 @@
+
+
 export enum EnumFieldType {
     String = 0,
     Number = 1,
@@ -17,6 +19,25 @@ export interface ISelectModel {
     key: string;
     value: string;
 }
+export class PaginationModel {
+    public showPaging: boolean= true;
+    public  pageSize: number= 10;
+    public  quickAccessMaxPages: number= 5;
+    public showGoToEndArrow: boolean= true;
+    public showGoToStartArrow: boolean= true;
+    public showGoToNextArrow: boolean= true;
+    public showGoToPreviousArrow: boolean= true;
+    public currentPage: number= 1;
+    public activePageCssClass: string= 'sui-theme';
+    public clsGoToNextPageIcon: string= 'fa fa-angle-right';
+    public clsGoToPreviousPageIcon: string= 'fa fa-angle-left';
+    public clsGoToStartIcon: string= 'fa fa-angle-double-left';
+    public clsGoToEndIcon: string= 'fa fa-angle-double-right';
+    public toolTipGoToNext= 'Go to next page';
+    public toolTipGoToPrevious= 'Go to next page';
+    public toolTipGoToStart= 'Go to first page';
+    public toolTipGoToEnd= 'Go to last page';
+}
 
 export interface IColumnModel {
     fieldName: string;
@@ -30,6 +51,7 @@ export interface IColumnModel {
     autoCreateSelectListFromData: boolean;
     selectList: SelectModel[];
 }
+
 export interface ITableModel {
 
     getUrl?: string;
@@ -58,6 +80,7 @@ export interface ITableModel {
     style: Object;
     rowStyle: Object;
     headerStyle: Object;
+    pagination: PaginationModel;
 
 }
 export class SelectModel implements ISelectModel {
@@ -87,6 +110,10 @@ export class TableModel implements ITableModel {
     public sortAscIcon: string = 'fa fa-sort-asc';
     public searchInputCssClass: string = 'sui-input';
     public searchInputPlaceholderText: string= 'Search ...';
+    public pagination: PaginationModel= new PaginationModel();
+    public showColumnChooserButton: boolean= true;
+    public cssClassColumnChooser: string= 'sui-btn sui-theme';
+    public columnChooserText: string= 'Choose Columns';
     constructor(public columns: IColumnModel[] = [], public data: any[] = []) { }
 }
 

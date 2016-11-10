@@ -8,14 +8,16 @@ import { RatingComponent } from './sui.rating/sui.rating.component';
 import { TableComponent } from './sui.table/sui.table.component';
 import { FilterPipe } from './sui.util/sui.util.filter.pipe';
 import { OrderByPipe } from './sui.util/sui.util.orderBy.pipe';
-import { VisibleFilter } from './sui.util/sui.util.visible.pipe';
+import { VisiblePipe } from './sui.util/sui.util.visible.pipe';
+import { PagingPipe } from './sui.util/sui.util.paging.pipe';
 
 
 @NgModule({
     declarations: [
         FilterPipe,
         OrderByPipe,
-        VisibleFilter,
+        PagingPipe,
+        VisiblePipe,
         NavigationComponent,
         RatingComponent,
         TableComponent],
@@ -23,7 +25,8 @@ import { VisibleFilter } from './sui.util/sui.util.visible.pipe';
     exports: [
         CommonModule,
         FormsModule,
-        VisibleFilter,
+        PagingPipe,
+        VisiblePipe,
         RouterModule,
         FilterPipe,
         OrderByPipe,
