@@ -20,6 +20,7 @@ export class TableComponent implements OnInit {
     pageSize: number;
     totalPageCount: number;
     filterOrCondition: boolean= false;
+    showDialog: boolean= false;
     ngOnInit(): void {
         this.getColumns().forEach(y => {
             if (y.hidden)
@@ -50,6 +51,13 @@ export class TableComponent implements OnInit {
         return [];
     }
 
+    onEditRow(row: any) {
+        debugger;
+        this.showDialog = !this.showDialog ;
+    }
+    onDeleteRow(row: any) {
+
+    }
     onPageClick(item: number) {
         if (item === 0) {
             this.currentPage = 1;

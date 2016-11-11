@@ -114,6 +114,9 @@ export class TableModel implements ITableModel {
     public showColumnChooserButton: boolean= true;
     public cssClassColumnChooser: string= 'sui-btn sui-theme';
     public columnChooserText: string= 'Choose Columns';
+
+    public cssEditIcon: string = 'fa fa-edit';
+    public cssDeleteIcon: string = 'fa fa-times';
     constructor(public columns: IColumnModel[] = [], public data: any[] = []) { }
 }
 

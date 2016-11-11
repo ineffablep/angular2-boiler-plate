@@ -18,7 +18,8 @@
         <table [ngClass]="this.tableModel.cssClass" [ngStyle]="this.tableModel.style" *ngIf="tableModel.data && tableModel.data.length">
             <thead>
                 <tr>
-                    <th *ngFor="let column of tableModel.columns | visible:hiddenFields;let in=index;trackBy:trackByIndex" [ngClass]="this.tableModel.headerCssClass" [ngStyle]="this.tableModel.headerStyle">
+                    <th *ngFor="let column of tableModel.columns | visible:hiddenFields;let in=index;trackBy:trackByIndex" [ngClass]="this.tableModel.headerCssClass"
+                        [ngStyle]="this.tableModel.headerStyle">
                         <a (click)="onSortClick(column)" class="sui-pointer">
                             <span class="sui-left"> {{column.displayName}} </span>
                             <span class="sui-margin-left-5" *ngIf="column.canSort"> 
@@ -39,15 +40,21 @@
                           </select>
                         </div>
                     </th>
+                    <th> </th>
                 </tr>
 
             </thead>
             <tbody>
                 <tr *ngFor="let row of tableModel.data | filter : filters:filterOrCondition |orderBy:sortKey:descOrder| pagination :currentPage:pageSize; let in=index;trackBy:trackByIndex ">
-                    <td *ngFor="let k=index;trackBy:trackByIndex;let col of tableModel.columns | visible:hiddenFields" [ngClass]="this.tableModel.rowCssClass" [ngStyle]="this.tableModel.rowStyle">
+                    <td *ngFor="let k=index;trackBy:trackByIndex;let col of tableModel.columns | visible:hiddenFields" [ngClass]="this.tableModel.rowCssClass"
+                        [ngStyle]="this.tableModel.rowStyle">
                         <span *ngIf="col.fieldType!==4 &&col.fieldType!==7">{{row[col.fieldName]}}</span>
                         <input class="sui-table-check" disabled type="checkbox" *ngIf="col.fieldType===4" [(ngModel)]="row[col.fieldName]" />
                         <img src="{{row[col.fieldName]}}" *ngIf="col.fieldType===7" />
+                    </td>
+                    <td>
+                        <a class="sui-btn-info" (click)="onEditRow(row)"> <i class="{{tableModel.cssEditIcon}}"> </i> </a>
+                        <a class="sui-btn-danger" (click)="onDeleteRow(row)"> <i class="{{tableModel.cssDeleteIcon}}"> </i> </a>
 
                     </td>
                 </tr>
@@ -65,3 +72,8 @@
         </ul>
     </div>
 </div>
+
+<sui-modal [(visible)]="showDialog" headerText="Edit">
+  
+  <button (click)="showDialog = !showDialog" class="btn">Close</button>
+</sui-modal>

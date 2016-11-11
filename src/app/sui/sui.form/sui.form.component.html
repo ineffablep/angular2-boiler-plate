@@ -1,0 +1,10 @@
+<div class="sui-container">
+    <form (ngSubmit)="onSuiFormSubmit()" [ngFormModel]="form">
+        <div *ngFor="let field of fields" class="sui-row">
+            <sui-field [field]="field" [form]="form"></sui-field>
+        </div>
+        <div class="sui-row">
+            <button type="submit" [disabled]="!form.valid" class="sui-btn-success"><i class="fa fa-ok-circle"> </i> Save</button>
+        </div>
+    </form>
+</div>

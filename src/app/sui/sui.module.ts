@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NavigationComponent } from './sui.navigation/sui.navigation.component';
 import { RatingComponent } from './sui.rating/sui.rating.component';
@@ -10,6 +10,11 @@ import { FilterPipe } from './sui.util/sui.util.filter.pipe';
 import { OrderByPipe } from './sui.util/sui.util.orderBy.pipe';
 import { VisiblePipe } from './sui.util/sui.util.visible.pipe';
 import { PagingPipe } from './sui.util/sui.util.paging.pipe';
+import { ModalComponent } from './sui.modal/sui.modal.component';
+import { DropdownField,
+        TextboxField,
+        FormFields,
+        FormComponent } from './sui.form/sui.form.component';
 
 
 @NgModule({
@@ -18,21 +23,30 @@ import { PagingPipe } from './sui.util/sui.util.paging.pipe';
         OrderByPipe,
         PagingPipe,
         VisiblePipe,
+        ModalComponent,
         NavigationComponent,
         RatingComponent,
-        TableComponent],
-    imports: [CommonModule, RouterModule, FormsModule],
+        TableComponent,
+        DropdownField,
+        TextboxField,
+        FormFields,
+        FormComponent],
+    imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
     exports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         PagingPipe,
         VisiblePipe,
         RouterModule,
         FilterPipe,
         OrderByPipe,
+        ModalComponent,
         TableComponent,
         NavigationComponent,
-        RatingComponent
+        RatingComponent,
+        FormFields,
+        FormComponent
     ]
 })
 export class SuiModule { }

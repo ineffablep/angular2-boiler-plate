@@ -405,6 +405,8 @@
   font-size: 24px;
   font-weight: bold;
   text-decoration: none;
+  background-color: transparent;
+  border: none;
 }
 .sui-closebtn:hover {
   color: #000000;
