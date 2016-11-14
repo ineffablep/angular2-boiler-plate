@@ -60,22 +60,23 @@
         </table>
 
     </div>
-    <div class="sui-container sui-margin-top" *ngIf="tableModel.pagination.showPaging && totalPageCount>1">
-        <ul class="sui-pagination sui-border sui-round">
+    <div class="sui-container sui-margin-top">
+        <ul class="sui-pagination sui-border sui-round" *ngIf="tableModel.pagination.showPaging && totalPageCount>1">
             <li *ngIf="tableModel.pagination.showGoToStartArrow"><a (click)="onPageClick(1)" title="{{tableModel.pagination.toolTipGoToStart}}"><i class="{{tableModel.pagination.clsGoToStartIcon}}"> </i> </a></li>
             <li *ngIf="tableModel.pagination.showGoToPreviousArrow"><a (click)="onPageClick(currentPage-1)" title="{{tableModel.pagination.toolTipGoToPrevious}}"><i class="{{tableModel.pagination.clsGoToPreviousPageIcon}}"> </i></a></li>
             <li *ngFor="let item of getPages()"><a (click)="onPageClick(item)" class="{{currentPage==item ? tableModel.pagination.activePageCssClass : 'sui-pointer'}}">{{item}}</a></li>
             <li *ngIf="tableModel.pagination.showGoToNextArrow"><a (click)="onPageClick(currentPage+1)" title="{{tableModel.pagination.toolTipGoToNext}}"><i class="{{tableModel.pagination.clsGoToNextPageIcon}}"> </i></a></li>
             <li *ngIf="tableModel.pagination.showGoToEndArrow"><a (click)="onPageClick(totalPageCount)" title="{{tableModel.pagination.toolTipGoToEnd}}"><i class="{{tableModel.pagination.clsGoToEndIcon}}"> </i></a></li>
         </ul>
+        <!--<input type="number" placeholder="page Size" class="sui-input-inline sui-right" (keyup)="onpageSizeChange($event)">-->
     </div>
 </div>
 
-<sui-modal [(visible)]="showDialog" headerText="Edit">
-    <sui-form [fields]="fields" (send)="saveForm($event);"> </sui-form>
+<sui-modal [(visible)]=" showDialog " headerText="Edit ">
+    <sui-form [fields]="fields " (send)="saveForm($event); "> </sui-form>
 </sui-modal>
 
 
-<sui-confirm [(confirmMessage)]="deleteConfirmMessage" [(visible)]="confirmDelete" (response)="deleteResponse($event);"> </sui-confirm>
+<sui-confirm [(confirmMessage)]="deleteConfirmMessage " [(visible)]="confirmDelete " (response)="deleteResponse($event); "> </sui-confirm>
 
-<sui-form [fields]="fields" (send)="saveForm($event);" *ngIf="showForm"> </sui-form>
+<sui-form [fields]="fields " (send)="saveForm($event); " *ngIf="showForm "> </sui-form>

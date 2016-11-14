@@ -79,6 +79,11 @@ export class TableComponent implements OnInit {
         return [];
     }
 
+    onpageSizeChange(event: any) {
+         this.tableModel.pagination.pageSize = event.target.value;
+         this.getPages();
+         this.onPageClick(1);
+    }
     onEditRow(row: any) {
         this.setFormFields(row);
         this.isEditRow = true;
@@ -159,6 +164,8 @@ export class TableComponent implements OnInit {
     }
 
     onPageClick(item: number) {
+        if (!item)
+        this.currentPage = 1;
         if (item === 0) {
             this.currentPage = 1;
         } else if (item > this.totalPageCount) {
