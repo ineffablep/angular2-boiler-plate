@@ -14,6 +14,7 @@ export class AppComponent {
       let links = [new RouteLinkModel('welcome', 'Welcome'),
                    new RouteLinkModel('ratingsUi', 'Rating Sample'),
                    new RouteLinkModel('tableUi', 'Table Sample'),
+                   new RouteLinkModel('sampleForm', 'Form Sample'),
 
                   ];
       this.nav.links = links;

@@ -1330,8 +1330,6 @@ ul.sui-ul li:last-child {
   font-size: 24px;
   font-weight: bold;
   text-decoration: none;
-  background-color: transparent;
-  border: none;
 }
 .sui-closebtn:hover {
   color: #000000;
@@ -1349,6 +1347,7 @@ ul.sui-ul li:last-child {
 }
 .sui-modal {
   z-index: 3;
+  display: none;
   padding-top: 100px;
   position: fixed;
   left: 0;
@@ -1357,7 +1356,6 @@ ul.sui-ul li:last-child {
   height: 100%;
   overflow: auto;
   background-color: #000000;
-  
 }
 .sui-modal-content {
   margin: auto;
@@ -1479,6 +1477,9 @@ input[type=radio].sui-radio:disabled + .sui-validate {
 .sui-dropdown-content a {
   display: block;
   padding: 6px 16px;
+}
+.sui-text-error {
+  color: red;
 }
 .sui-table {
   border-collapse: collapse;

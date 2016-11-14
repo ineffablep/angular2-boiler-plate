@@ -84,3 +84,6 @@ input[type=radio].sui-radio:disabled + .sui-validate {
   display: block;
   padding: 6px 16px;
 }
+.sui-text-error {
+  color: red;
+}

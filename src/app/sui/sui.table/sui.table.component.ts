@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FilterModel } from '../sui.util/sui.util.filter.model';
+import { FormBase, TextboxField, DropdownField } from '../sui.form/sui.form.component';
 import {
     ITableModel, IColumnModel, ISelectModel, SelectModel,
     EnumFieldType, EnumEditType
@@ -19,8 +20,10 @@ export class TableComponent implements OnInit {
     currentPage: number;
     pageSize: number;
     totalPageCount: number;
-    filterOrCondition: boolean= false;
-    showDialog: boolean= false;
+    filterOrCondition: boolean = false;
+    showDialog: boolean = false;
+    fields: FormBase[] = [];
+
     ngOnInit(): void {
         this.getColumns().forEach(y => {
             if (y.hidden)
@@ -29,6 +32,9 @@ export class TableComponent implements OnInit {
         this.currentPage = this.tableModel.pagination.currentPage;
         this.pageSize = this.tableModel.pagination.pageSize;
         this.getPages();
+    }
+    getType(field: EnumFieldType): string {
+        return EnumFieldType[field];
     }
     getPages() {
         let data = this.getData();
@@ -52,8 +58,8 @@ export class TableComponent implements OnInit {
     }
 
     onEditRow(row: any) {
-        debugger;
-        this.showDialog = !this.showDialog ;
+        this.setFormFields(row);
+        this.showDialog = !this.showDialog;
     }
     onDeleteRow(row: any) {
 
@@ -148,5 +154,41 @@ export class TableComponent implements OnInit {
     }
     trackByIndex(index: number, item: any) {
         return index;
+    }
+
+    setFormFields(row: any) {
+        let order = 1;
+        this.fields = [];
+        this.tableModel.columns.forEach(y => {
+            let val = row[y.fieldName];
+            let fieldType = this.getType(y.fieldType);
+            if (fieldType === 'select') {
+                let selectList = this.getSelectList(y);
+                let options: any[] = [];
+                selectList.forEach(z => {
+                    options.push({ key: z.key, value: z.value });
+                });
+                this.fields.push(new DropdownField({
+                    key: y.fieldName,
+                    label: y.displayName,
+                    options: options,
+                    value: val,
+                    order: order
+                }));
+            } else {
+                this.fields.push(
+                    new TextboxField({
+                        key: y.fieldName,
+                        label: y.displayName,
+                        type: fieldType,
+                        required: y.required,
+                        value: val,
+                        placeholder: y.displayName,
+                        order: order
+                    }),
+                );
+                order = order + 1;
+            }
+        });
     }
 }

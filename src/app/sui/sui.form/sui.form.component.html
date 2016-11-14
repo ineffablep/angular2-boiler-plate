@@ -1,10 +1,25 @@
 <div class="sui-container">
-    <form (ngSubmit)="onSuiFormSubmit()" [ngFormModel]="form">
+    <form (ngSubmit)="onSuiFormSubmit()" [formGroup]="form" class="sui-form">
         <div *ngFor="let field of fields" class="sui-row">
-            <sui-field [field]="field" [form]="form"></sui-field>
+            <label [attr.for]="field.key" class="sui-label">{{field.label}}</label>
+
+            <input *ngIf="field.controlType=='textbox'" 
+                    [id]="field.key" 
+                    [type]="field.type" 
+                    formControlName="{{field.key}}"
+                    class="sui-input" 
+                    [placeholder]="field.placeholder"
+                    [readonly]="field.readonly">
+            <p>
+                <select [id]="field.key" *ngIf="field.controlType=='dropdown'" class="sui-select">
+                        <option style="display:none" value="">Choose an option</option>
+                        <option *ngFor="let opt of field.options" [value]="opt.key">{{opt.value}}</option>
+                </select>
+            </p>
+            <div class="sui-text-error" *ngIf="!isValid(field)">{{field.label}} is required</div>
         </div>
         <div class="sui-row">
-            <button type="submit" [disabled]="!form.valid" class="sui-btn-success"><i class="fa fa-ok-circle"> </i> Save</button>
+            <button type="submit" [disabled]="!form.valid" class="sui-btn-success"><i class="fa fa-check-circle-o"></i> Save</button>
         </div>
     </form>
 </div>

@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class TableSampleComponent {
   getTableModel() {
-    let pic = new ColumnModel('picture', 'Picture', EnumFieldType.Image);
+    let pic = new ColumnModel('picture', 'Picture', EnumFieldType.image);
     pic.canFilter = false;
     pic.canSort = false;
     let id = new ColumnModel('_id', 'Id');
@@ -18,15 +18,15 @@ export class TableSampleComponent {
     let columns = [
       id,
       new ColumnModel('index', 'Index'),
-      new ColumnModel('isActive', 'IsActive', EnumFieldType.Boolean),
-      new ColumnModel('balance', 'Balance', EnumFieldType.Currency),
+      new ColumnModel('isActive', 'IsActive', EnumFieldType.checkbox),
+      new ColumnModel('balance', 'Balance', EnumFieldType.text),
       pic,
-      new ColumnModel('age', 'Age', EnumFieldType.Number),
-      new ColumnModel('eyeColor', 'EyeColor', EnumFieldType.Select),
+      new ColumnModel('age', 'Age', EnumFieldType.number),
+      new ColumnModel('eyeColor', 'EyeColor', EnumFieldType.select),
       new ColumnModel('fullName', 'FullName'),
       new ColumnModel('company', 'Company'),
-      new ColumnModel('email', 'Email', EnumFieldType.Email),
-      new ColumnModel('phone', 'Phone', EnumFieldType.Phone),
+      new ColumnModel('email', 'Email', EnumFieldType.email),
+      new ColumnModel('phone', 'Phone', EnumFieldType.tel),
       new ColumnModel('address', 'Address'),
       new ColumnModel('registered', 'Registered'),
       new ColumnModel('latitude', 'Latitude'),

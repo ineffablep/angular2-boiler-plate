@@ -1,28 +1,35 @@
-import { Component, Injectable, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Validators, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
-    selector: 'sui-form',
-    templateUrl: './sui.form.component.html'
+  selector: 'sui-form',
+  templateUrl: './sui.form.component.html',
 })
-export class FormComponent  implements OnInit {
- @Input() fields: FormBase<any>[] = [];
+export class FormComponent implements OnInit {
+  @Input() fields: FormBase[] = [];
   @Output('send') submitted: EventEmitter<any> = new EventEmitter();
   form: FormGroup;
-  constructor(private qcs: FormControlService) {  }
-
   ngOnInit() {
-    this.form = this.qcs.toControlGroup(this.fields);
-  }
+    let group = {};
 
+    this.fields.forEach(field => {
+      group[field.key] = field.required ?
+        new FormControl({ value: field.value || '', disabled: field.disabled }
+          , Validators.required) :
+        new FormControl({ value: field.value || '', disabled: field.disabled });
+    });
+    this.form = new FormGroup(group);
+  }
+  isValid(field: FormBase): boolean {
+    return this.form.controls[field.key].valid;
+  }
   onSuiFormSubmit() {
     this.submitted.emit(this.form.value);
   }
 }
 
-
-export class FormBase<T>{
-  value: T;
+export class FormBase {
+  value: any;
   key: string;
   label: string;
   required: boolean;
@@ -32,16 +39,16 @@ export class FormBase<T>{
   controlType: string;
   placeholder: string;
   constructor(options: {
-      value?: T,
-      key?: string,
-      label?: string,
-      required?: boolean,
-      readonly?: boolean,
-      disabled?: boolean,
-      order?: number,
-      controlType?: string,
-      placeholder?: string
-    } = {}) {
+    value?: any,
+    key?: string,
+    label?: string,
+    required?: boolean,
+    readonly?: boolean,
+    disabled?: boolean,
+    order?: number,
+    controlType?: string,
+    placeholder?: string
+  } = {}) {
     this.value = options.value;
     this.key = options.key || '';
     this.label = options.label || '';
@@ -54,7 +61,7 @@ export class FormBase<T>{
   }
 }
 
-export class TextboxField extends FormBase<string> {
+export class TextboxField extends FormBase {
   controlType = 'textbox';
   type: string;
 
@@ -64,40 +71,12 @@ export class TextboxField extends FormBase<string> {
   }
 }
 
-export class DropdownField extends FormBase<string> {
+export class DropdownField extends FormBase {
   controlType = 'dropdown';
-  options: {key: string, value: string}[] = [];
+  options: { key: string, value: string }[] = [];
 
   constructor(options: {} = {}) {
     super(options);
     this.options = options['options'] || [];
   }
-}
-
-
-@Component({
-    selector: 'sui-field',
-    templateUrl: './sui.formField.component.html'
-})
-export class FormFieldComponent {
-  @Input() field: FormBase<any>;
-  @Input() form: FormGroup;
-  get isValid() { return this.form.controls[this.field.key].valid; }
-}
-
-
-@Injectable()
-export class FormControlService {
-
-    constructor(private fb: FormBuilder) { }
-
-    toControlGroup(fields: FormBase<any>[] ) {
-        let group = {};
-
-        fields.forEach(field => {
-            group[field.key] = field.required ? [field.value || '',
-                               Validators.required] : [field.value || ''];
-        });
-        return this.fb.group(group);
-    }
 }

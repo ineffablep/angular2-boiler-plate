@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { RatingSampleComponent } from './samples/sample.rating/sample.rating.component';
 import { TableSampleComponent } from './samples/sample.table/sample.table.component';
+import { SampleFormComponent } from './samples/sample.form/sample.form.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { TableSampleComponent } from './samples/sample.table/sample.table.compon
       { path: 'welcome', component: WelcomeComponent },
       { path: 'ratingsUi', component: RatingSampleComponent },
       { path: 'tableUi', component: TableSampleComponent },
+      { path: 'sampleForm', component: SampleFormComponent },
 
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
@@ -30,7 +32,8 @@ import { TableSampleComponent } from './samples/sample.table/sample.table.compon
     AppComponent,
     WelcomeComponent,
     RatingSampleComponent,
-    TableSampleComponent
+    TableSampleComponent,
+    SampleFormComponent
   ],
   bootstrap: [AppComponent]
 })

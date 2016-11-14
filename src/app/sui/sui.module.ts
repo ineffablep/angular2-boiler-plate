@@ -11,10 +11,11 @@ import { OrderByPipe } from './sui.util/sui.util.orderBy.pipe';
 import { VisiblePipe } from './sui.util/sui.util.visible.pipe';
 import { PagingPipe } from './sui.util/sui.util.paging.pipe';
 import { ModalComponent } from './sui.modal/sui.modal.component';
-import { DropdownField,
-        TextboxField,
-        FormFields,
-        FormComponent } from './sui.form/sui.form.component';
+import {
+    DropdownField,
+    TextboxField,
+    FormComponent
+} from './sui.form/sui.form.component';
 
 
 @NgModule({
@@ -27,9 +28,6 @@ import { DropdownField,
         NavigationComponent,
         RatingComponent,
         TableComponent,
-        DropdownField,
-        TextboxField,
-        FormFields,
         FormComponent],
     imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
     exports: [
@@ -41,11 +39,11 @@ import { DropdownField,
         RouterModule,
         FilterPipe,
         OrderByPipe,
+
         ModalComponent,
         TableComponent,
         NavigationComponent,
         RatingComponent,
-        FormFields,
         FormComponent
     ]
 })

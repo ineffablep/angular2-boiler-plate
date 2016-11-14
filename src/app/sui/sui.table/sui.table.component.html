@@ -28,13 +28,7 @@
                              </span>
                         </a>
                         <div *ngIf="column.canFilter">
-                            <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==0" type="text" (keyup)="onFilterChange($event,column.fieldName)">
-                            <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==1" type="number" (keyup)="onFilterChange($event,column.fieldName)">
-                            <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==2" type="date" (keyup)="onFilterChange($event,column.fieldName)">
-                            <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==3" type="datetime" (keyup)="onFilterChange($event,column.fieldName)">
-                            <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==6" type="text" (keyup)="onFilterChange($event,column.fieldName)">
-                            <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==8" type="email" (keyup)="onFilterChange($event,column.fieldName)">
-                            <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==9" type="text" (keyup)="onFilterChange($event,column.fieldName)">
+                            <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType!=5 && column.fieldType!=4" [type]="getType(column.fieldType)" (keyup)="onFilterChange($event,column.fieldName)">
                             <select class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==5 || column.fieldType==4" (change)="onFilterChange($event,column.fieldName)"> 
                              <option *ngFor="let item of getSelectList(column);let in=index;trackBy:trackByIndex" [value]="item.key">{{item.value}}</option>
                           </select>
@@ -55,7 +49,6 @@
                     <td>
                         <a class="sui-btn-info" (click)="onEditRow(row)"> <i class="{{tableModel.cssEditIcon}}"> </i> </a>
                         <a class="sui-btn-danger" (click)="onDeleteRow(row)"> <i class="{{tableModel.cssDeleteIcon}}"> </i> </a>
-
                     </td>
                 </tr>
             </tbody>
@@ -74,6 +67,6 @@
 </div>
 
 <sui-modal [(visible)]="showDialog" headerText="Edit">
-  
-  <button (click)="showDialog = !showDialog" class="btn">Close</button>
+
+    <button (click)="showDialog = !showDialog" class="btn">Close</button>
 </sui-modal>
