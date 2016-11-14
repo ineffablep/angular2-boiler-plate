@@ -23,7 +23,10 @@ export class TableComponent implements OnInit {
     filterOrCondition: boolean = false;
     showDialog: boolean = false;
     fields: FormBase[] = [];
-
+    deleteConfirmMessage: string = 'Are you Sure, You want to delete record?';
+    confirmDelete: boolean = false;
+    showForm: boolean = false;
+    showTable: boolean = true;
     ngOnInit(): void {
         this.getColumns().forEach(y => {
             if (y.hidden)
@@ -59,12 +62,26 @@ export class TableComponent implements OnInit {
 
     onEditRow(row: any) {
         this.setFormFields(row);
-        this.showDialog = !this.showDialog;
+        if (this.tableModel.editType === 2) {
+            this.showDialog = !this.showDialog;
+        } else if (this.tableModel.editType === 3) {
+            this.showTable = false;
+            this.showForm = true;
+        }
     }
     onDeleteRow(row: any) {
-
+        this.confirmDelete = !this.confirmDelete;
     }
     saveForm(object: any) {
+        if (typeof object === 'boolean') {
+            if (!object) {
+            this.showTable = true;
+            this.showForm = false;
+            this.showDialog = false;
+            }
+        }
+    }
+    deleteResponse(response: boolean) {
 
     }
     onPageClick(item: number) {

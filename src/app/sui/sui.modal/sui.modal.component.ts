@@ -21,6 +21,7 @@ export class ModalComponent implements OnInit {
   @Input() closable = true;
   @Input() visible: boolean;
   @Input() headerText: string;
+  @Input() headerIcon: string= '';
   @Input() cssClassHeader: string= 'sui-theme';
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 

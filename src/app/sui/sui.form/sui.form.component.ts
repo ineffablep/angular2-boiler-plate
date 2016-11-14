@@ -31,6 +31,9 @@ export class FormComponent implements OnInit {
   onSuiFormSubmit() {
     this.submitted.emit(this.form.value);
   }
+  onSuiFormCancel() {
+    this.submitted.emit(false);
+  }
 }
 
 export class FormBase {

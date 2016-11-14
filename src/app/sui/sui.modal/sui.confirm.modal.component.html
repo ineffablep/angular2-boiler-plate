@@ -1,0 +1,16 @@
+<sui-modal [(visible)]="visible" headerText="{{headerText}}" closable="false" headerIcon='fa fa-question-circle'>
+    <div class="sui-container">
+        <p>
+            {{confirmMessage}}
+        </p>
+
+    </div>
+    <div class="sui-container sui-margin-top">
+        <ng-content></ng-content>
+    </div>
+    <br/>
+    <footer class="sui-container">
+        <a (click)="confirm()" class="sui-btn-success">{{yesBtnText}}</a>
+        <a (click)="reject()" class="sui-btn-danger">{{noBtnText}}</a>
+    </footer>
+</sui-modal>

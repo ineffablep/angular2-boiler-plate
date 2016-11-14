@@ -3,18 +3,8 @@
         <div *ngFor="let field of fields" class="sui-row">
             <label [attr.for]="field.key" class="sui-label">{{field.label}}</label>
 
-            <input *ngIf="field.type!='checkbox' && field.type!='select'" 
-                    [id]="field.key" 
-                    [type]="field.type" 
-                    class="sui-input" 
-                    [placeholder]="field.placeholder"
-                    [readonly]="field.readonly">
-            <input *ngIf="field.type=='checkbox'" 
-                    [id]="field.key" 
-                    [type]="field.type" 
-                    class="sui-check" 
-                    [placeholder]="field.placeholder"
-                    [readonly]="field.readonly">
+            <input *ngIf="field.type!='checkbox' && field.type!='select'" [id]="field.key" [type]="field.type" class="sui-input" [placeholder]="field.placeholder" [readonly]="field.readonly">
+            <input *ngIf="field.type=='checkbox'" [id]="field.key" [type]="field.type" class="sui-check" [placeholder]="field.placeholder" [readonly]="field.readonly">
             <p>
                 <select [id]="field.key" *ngIf="field.controlType=='dropdown'" class="sui-select">
                         <option style="display:none" value="">Choose an option</option>
@@ -23,8 +13,10 @@
             </p>
             <div class="sui-text-error" *ngIf="!isValid(field)">{{field.label}} is required</div>
         </div>
-        <div class="sui-row">
+        <div class="sui-container sui-right ">
             <button type="submit" [disabled]="!form.valid" class="sui-btn-success"><i class="fa fa-check-circle-o"></i> Save</button>
+            <button (click)="onSuiFormCancel()" type="button" class="sui-btn-danger"><i class="fa fa-times"></i> Cancel</button>
+
         </div>
     </form>
 </div>

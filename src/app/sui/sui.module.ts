@@ -11,6 +11,9 @@ import { OrderByPipe } from './sui.util/sui.util.orderBy.pipe';
 import { VisiblePipe } from './sui.util/sui.util.visible.pipe';
 import { PagingPipe } from './sui.util/sui.util.paging.pipe';
 import { ModalComponent } from './sui.modal/sui.modal.component';
+import { ConfirmModalComponent } from './sui.modal/sui.confirm.modal.component';
+
+
 import {
     DropdownField,
     TextboxField,
@@ -24,10 +27,12 @@ import {
         OrderByPipe,
         PagingPipe,
         VisiblePipe,
+
         ModalComponent,
         NavigationComponent,
         RatingComponent,
         TableComponent,
+        ConfirmModalComponent,
         FormComponent],
     imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
     exports: [
@@ -44,6 +49,7 @@ import {
         TableComponent,
         NavigationComponent,
         RatingComponent,
+        ConfirmModalComponent,
         FormComponent
     ]
 })

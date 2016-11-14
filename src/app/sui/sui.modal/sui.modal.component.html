@@ -2,7 +2,7 @@
     <div class="sui-modal-content">
         <header class="{{cssClassHeader}}">
             <button *ngIf="closable" (click)="close()" aria-label="Close" class="sui-closebtn">X</button>
-            <h2>{{headerText}}</h2>
+            <h3> <i class="{{headerIcon}}"> </i> {{headerText}}</h3>
         </header>
         <div class="sui-container sui-margin-top">
             <ng-content></ng-content>

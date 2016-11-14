@@ -1,4 +1,4 @@
-<div class="sui-container" *ngIf="tableModel">
+<div class="sui-container" *ngIf="tableModel && showTable">
     <div class='sui-container sui-padding-4' *ngIf="tableModel.enableQuickFilterBy ">
         <div class="sui-container sui-third">
             <div class="sui-dropdown-hover" *ngIf="tableModel.showColumnChooserButton">
@@ -18,8 +18,7 @@
         <table [ngClass]="this.tableModel.cssClass" [ngStyle]="this.tableModel.style" *ngIf="tableModel.data && tableModel.data.length">
             <thead>
                 <tr>
-                    <th *ngFor="let column of tableModel.columns | visible:hiddenFields;let in=index;trackBy:trackByIndex" [ngClass]="this.tableModel.headerCssClass"
-                        [ngStyle]="this.tableModel.headerStyle">
+                    <th *ngFor="let column of tableModel.columns | visible:hiddenFields;let in=index;trackBy:trackByIndex" [ngClass]="this.tableModel.headerCssClass" [ngStyle]="this.tableModel.headerStyle">
                         <a (click)="onSortClick(column)" class="sui-pointer">
                             <span class="sui-left"> {{column.displayName}} </span>
                             <span class="sui-margin-left-5" *ngIf="column.canSort"> 
@@ -40,8 +39,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let row of tableModel.data | filter : filters:filterOrCondition |orderBy:sortKey:descOrder| pagination :currentPage:pageSize; let in=index;trackBy:trackByIndex ">
-                    <td *ngFor="let k=index;trackBy:trackByIndex;let col of tableModel.columns | visible:hiddenFields" [ngClass]="this.tableModel.rowCssClass"
-                        [ngStyle]="this.tableModel.rowStyle">
+                    <td *ngFor="let k=index;trackBy:trackByIndex;let col of tableModel.columns | visible:hiddenFields" [ngClass]="this.tableModel.rowCssClass" [ngStyle]="this.tableModel.rowStyle">
                         <span *ngIf="col.fieldType!==4 &&col.fieldType!==7">{{row[col.fieldName]}}</span>
                         <input class="sui-table-check" disabled type="checkbox" *ngIf="col.fieldType===4" [(ngModel)]="row[col.fieldName]" />
                         <img src="{{row[col.fieldName]}}" *ngIf="col.fieldType===7" />
@@ -68,5 +66,9 @@
 
 <sui-modal [(visible)]="showDialog" headerText="Edit">
     <sui-form [fields]="fields" (send)="saveForm($event);"> </sui-form>
-    <button (click)="showDialog = !showDialog" class="sui-btn">Close</button>
 </sui-modal>
+
+
+<sui-confirm [(confirmMessage)]="deleteConfirmMessage" [(visible)]="confirmDelete" (response)="deleteResponse($event);"> </sui-confirm>
+
+<sui-form [fields]="fields" (send)="saveForm($event);" *ngIf="showForm"> </sui-form>

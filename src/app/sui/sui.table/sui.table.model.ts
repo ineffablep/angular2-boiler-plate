@@ -22,7 +22,11 @@ export enum EnumFieldType {
     color = 18
 }
 export enum EnumEditType {
-    RowEdit, CellEdit, DialogEdit, FormEdit, None
+    RowEdit = 0,
+    CellEdit = 1,
+    DialogEdit = 2,
+    FormEdit = 3,
+    None = 4
 }
 export interface ISelectModel {
     key: string;
