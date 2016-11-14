@@ -1,7 +1,9 @@
-import { TableModel,
-         ColumnModel,
-         EnumFieldType,
-         EnumEditType } from '../../sui/sui.table/sui.table.model';
+import {
+  TableModel,
+  ColumnModel,
+  EnumFieldType,
+  EnumEditType
+} from '../../sui/sui.table/sui.table.model';
 import { Component } from '@angular/core';
 
 @Component({
@@ -15,14 +17,18 @@ export class TableSampleComponent {
     let id = new ColumnModel('_id', 'Id');
     id.identityField = true;
     id.hidden = true;
+    let eye = new ColumnModel('eyeColor', 'EyeColor', EnumFieldType.select);
+    eye.showInQuickFilter = true;
+    let age = new ColumnModel('age', 'Age', EnumFieldType.number);
+    age.showInQuickFilter=true;
     let columns = [
       id,
       new ColumnModel('index', 'Index'),
       new ColumnModel('isActive', 'IsActive', EnumFieldType.checkbox),
       new ColumnModel('balance', 'Balance', EnumFieldType.text),
       pic,
-      new ColumnModel('age', 'Age', EnumFieldType.number),
-      new ColumnModel('eyeColor', 'EyeColor', EnumFieldType.select),
+      age,
+      eye,
       new ColumnModel('fullName', 'FullName'),
       new ColumnModel('company', 'Company'),
       new ColumnModel('email', 'Email', EnumFieldType.email),

@@ -62,7 +62,7 @@ export interface IColumnModel {
     canEdit: boolean;
     identityField: boolean;
     fieldType: EnumFieldType;
-
+    showInQuickFilter: boolean;
     required: boolean;
     autoCreateSelectListFromData: boolean;
     selectList: SelectModel[];
@@ -72,8 +72,8 @@ export interface IColumnModel {
 export interface ITableModel {
 
     getUrl?: string;
+    addUrl?: string;
     updateUrl?: string;
-    insertUrl?: string;
     deleteUrl?: string;
     columns: IColumnModel[];
     data: any[];
@@ -148,6 +148,7 @@ export class ColumnModel implements IColumnModel {
     public filterInputCssClass: string = 'sui-input';
     public autoCreateSelectListFromData: boolean = true;
     public required: boolean = true;
+    public showInQuickFilter: boolean= false;
     constructor(public fieldName: string,
         public displayName: string,
         public fieldType: EnumFieldType = EnumFieldType.text) { }

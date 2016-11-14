@@ -37,6 +37,12 @@ input[type=radio].sui-radio:disabled + .sui-validate {
   padding: 8px;
   width: 100%;
 }
+.sui-input-inline {
+  border: none;
+  border-bottom: 1px solid #dddddd;
+  display: inline;
+  padding: 8px;
+}
 .sui-label {
   color: #009688;
 }

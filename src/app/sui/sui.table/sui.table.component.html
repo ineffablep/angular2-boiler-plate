@@ -1,5 +1,15 @@
 <div class="sui-container" *ngIf="tableModel && showTable">
     <div class='sui-container sui-padding-4' *ngIf="tableModel.enableQuickFilterBy ">
+
+        <div class="sui-container sui-twothird">
+            <input class="sui-input-inline" placeholder="{{tableModel.searchInputPlaceholderText}}" type="text" (keyup)="onFilterChange($event,'search')">
+            <span *ngFor="let column of tableModel.columns;let in=index;trackBy:trackByIndex">
+                 <input class="sui-input-inline"  placeholder="{{'Filter By ' + column.displayName}}"  *ngIf="column.showInQuickFilter && column.fieldType!=5 && column.fieldType!=4" [type]="getType(column.fieldType)" (keyup)="onFilterChange($event,column.fieldName)">
+                 <select class="sui-select"  *ngIf=" column.showInQuickFilter && (column.fieldType==5 || column.fieldType==4)" (change)="onFilterChange($event,column.fieldName)"> 
+                 <option *ngFor="let item of getSelectList(column);let in=index;trackBy:trackByIndex" [value]="item.key">{{item.value}}</option>
+                </select>
+            </span>
+        </div>
         <div class="sui-container sui-third">
             <div class="sui-dropdown-hover" *ngIf="tableModel.showColumnChooserButton">
                 <button class="{{tableModel.cssClassColumnChooser}}">{{tableModel.columnChooserText}}</button>
@@ -9,9 +19,6 @@
                     </a>
                 </div>
             </div>
-        </div>
-        <div class="sui-container sui-twothird">
-            <input class="{{tableModel.searchInputCssClass}}" placeholder="{{tableModel.searchInputPlaceholderText}}" type="text" (keyup)="onFilterChange($event,'search')">
         </div>
     </div>
     <div class="sui-table-container">
@@ -30,7 +37,7 @@
                             <input class="{{column.filterInputCssClass}}" *ngIf="column.fieldType!=5 && column.fieldType!=4" [type]="getType(column.fieldType)" (keyup)="onFilterChange($event,column.fieldName)">
                             <select class="{{column.filterInputCssClass}}" *ngIf="column.fieldType==5 || column.fieldType==4" (change)="onFilterChange($event,column.fieldName)"> 
                              <option *ngFor="let item of getSelectList(column);let in=index;trackBy:trackByIndex" [value]="item.key">{{item.value}}</option>
-                          </select>
+                             </select>
                         </div>
                     </th>
                     <th> </th>
