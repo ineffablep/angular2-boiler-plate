@@ -68,7 +68,7 @@
             <li *ngIf="tableModel.pagination.showGoToNextArrow"><a (click)="onPageClick(currentPage+1)" title="{{tableModel.pagination.toolTipGoToNext}}"><i class="{{tableModel.pagination.clsGoToNextPageIcon}}"> </i></a></li>
             <li *ngIf="tableModel.pagination.showGoToEndArrow"><a (click)="onPageClick(totalPageCount)" title="{{tableModel.pagination.toolTipGoToEnd}}"><i class="{{tableModel.pagination.clsGoToEndIcon}}"> </i></a></li>
         </ul>
-        <!--<input type="number" placeholder="page Size" class="sui-input-inline sui-right" (keyup)="onpageSizeChange($event)">-->
+        <input type="number" placeholder="Enter Page Size Numbers" class="sui-input-inline sui-right" (keyup)="onpageSizeChange($event)">
     </div>
 </div>
 
