@@ -55,6 +55,7 @@ export interface IColumnModel {
     canFilter: boolean;
     canSort: boolean;
     canExport: boolean;
+    canEdit: boolean;
     identityField: boolean;
     fieldType: EnumFieldType;
 
@@ -137,6 +138,7 @@ export class ColumnModel implements IColumnModel {
     public canFilter: boolean = true;
     public canSort: boolean = true;
     public canExport: boolean = true;
+    public canEdit: boolean = true;
     public identityField: boolean = false;
     public selectList: SelectModel[] = [];
     public filterInputCssClass: string = 'sui-input';

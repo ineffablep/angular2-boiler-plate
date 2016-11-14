@@ -3,11 +3,16 @@
         <div *ngFor="let field of fields" class="sui-row">
             <label [attr.for]="field.key" class="sui-label">{{field.label}}</label>
 
-            <input *ngIf="field.controlType=='textbox'" 
+            <input *ngIf="field.type!='checkbox' && field.type!='select'" 
                     [id]="field.key" 
                     [type]="field.type" 
-                    formControlName="{{field.key}}"
                     class="sui-input" 
+                    [placeholder]="field.placeholder"
+                    [readonly]="field.readonly">
+            <input *ngIf="field.type=='checkbox'" 
+                    [id]="field.key" 
+                    [type]="field.type" 
+                    class="sui-check" 
                     [placeholder]="field.placeholder"
                     [readonly]="field.readonly">
             <p>

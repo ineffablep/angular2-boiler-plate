@@ -67,6 +67,6 @@
 </div>
 
 <sui-modal [(visible)]="showDialog" headerText="Edit">
-
-    <button (click)="showDialog = !showDialog" class="btn">Close</button>
+    <sui-form [fields]="fields" (send)="saveForm($event);"> </sui-form>
+    <button (click)="showDialog = !showDialog" class="sui-btn">Close</button>
 </sui-modal>

@@ -15,6 +15,7 @@ export class AppComponent {
                    new RouteLinkModel('ratingsUi', 'Rating Sample'),
                    new RouteLinkModel('tableUi', 'Table Sample'),
                    new RouteLinkModel('sampleForm', 'Form Sample'),
+                   new RouteLinkModel('sampleModal', 'Modal Sample'),
 
                   ];
       this.nav.links = links;

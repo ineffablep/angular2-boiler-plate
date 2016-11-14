@@ -1,12 +1,13 @@
 <div [@modal] *ngIf="visible" class="sui-modal">
     <div class="sui-modal-content">
-        <header class="{{cssClassHeader}">
+        <header class="{{cssClassHeader}}">
             <button *ngIf="closable" (click)="close()" aria-label="Close" class="sui-closebtn">X</button>
             <h2>{{headerText}}</h2>
         </header>
-        <div class="sui-container sui-margin-top ">
+        <div class="sui-container sui-margin-top">
             <ng-content></ng-content>
         </div>
+        <br/>
     </div>
 </div>
 <div *ngIf="visible" class="sui-overlay" (click)="close()"></div>

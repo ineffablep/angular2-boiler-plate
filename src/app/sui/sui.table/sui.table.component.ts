@@ -64,6 +64,9 @@ export class TableComponent implements OnInit {
     onDeleteRow(row: any) {
 
     }
+    saveForm(object: any) {
+
+    }
     onPageClick(item: number) {
         if (item === 0) {
             this.currentPage = 1;
@@ -160,34 +163,36 @@ export class TableComponent implements OnInit {
         let order = 1;
         this.fields = [];
         this.tableModel.columns.forEach(y => {
-            let val = row[y.fieldName];
-            let fieldType = this.getType(y.fieldType);
-            if (fieldType === 'select') {
-                let selectList = this.getSelectList(y);
-                let options: any[] = [];
-                selectList.forEach(z => {
-                    options.push({ key: z.key, value: z.value });
-                });
-                this.fields.push(new DropdownField({
-                    key: y.fieldName,
-                    label: y.displayName,
-                    options: options,
-                    value: val,
-                    order: order
-                }));
-            } else {
-                this.fields.push(
-                    new TextboxField({
+            if (y.fieldName !== '_id' && y.fieldName !== 'index' && y.canEdit) {
+                let val = row[y.fieldName];
+                let fieldType = this.getType(y.fieldType);
+                if (fieldType === 'select') {
+                    let selectList = this.getSelectList(y);
+                    let options: any[] = [];
+                    selectList.forEach(z => {
+                        options.push({ key: z.key, value: z.value });
+                    });
+                    this.fields.push(new DropdownField({
                         key: y.fieldName,
                         label: y.displayName,
-                        type: fieldType,
-                        required: y.required,
+                        options: options,
                         value: val,
-                        placeholder: y.displayName,
                         order: order
-                    }),
-                );
-                order = order + 1;
+                    }));
+                } else {
+                    this.fields.push(
+                        new TextboxField({
+                            key: y.fieldName,
+                            label: y.displayName,
+                            type: fieldType,
+                            required: y.required,
+                            value: val,
+                            placeholder: y.displayName,
+                            order: order
+                        }),
+                    );
+                    order = order + 1;
+                }
             }
         });
     }

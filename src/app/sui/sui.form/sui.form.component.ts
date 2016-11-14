@@ -21,7 +21,12 @@ export class FormComponent implements OnInit {
     this.form = new FormGroup(group);
   }
   isValid(field: FormBase): boolean {
-    return this.form.controls[field.key].valid;
+    if (field && field.key) {
+      let acc = this.form.controls[field.key];
+      if (acc)
+        return acc.valid;
+    }
+    return true;
   }
   onSuiFormSubmit() {
     this.submitted.emit(this.form.value);
@@ -37,6 +42,7 @@ export class FormBase {
   disabled: boolean;
   order: number;
   controlType: string;
+  type: string;
   placeholder: string;
   constructor(options: {
     value?: any,
@@ -47,10 +53,12 @@ export class FormBase {
     disabled?: boolean,
     order?: number,
     controlType?: string,
+    type?: string,
     placeholder?: string
   } = {}) {
     this.value = options.value;
     this.key = options.key || '';
+    this.type = 'textbox';
     this.label = options.label || '';
     this.required = !!options.required;
     this.readonly = !!options.readonly;
@@ -63,7 +71,6 @@ export class FormBase {
 
 export class TextboxField extends FormBase {
   controlType = 'textbox';
-  type: string;
 
   constructor(options: {} = {}) {
     super(options);
@@ -73,8 +80,8 @@ export class TextboxField extends FormBase {
 
 export class DropdownField extends FormBase {
   controlType = 'dropdown';
+  type= 'select';
   options: { key: string, value: string }[] = [];
-
   constructor(options: {} = {}) {
     super(options);
     this.options = options['options'] || [];
