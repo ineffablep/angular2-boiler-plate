@@ -52,59 +52,12 @@ export class PaginationModel {
     public toolTipGoToEnd = 'Go to last page';
 }
 
-export interface IColumnModel {
-    fieldName: string;
-    displayName: string;
-    hidden: boolean;
-    canFilter: boolean;
-    canSort: boolean;
-    canExport: boolean;
-    canEdit: boolean;
-    identityField: boolean;
-    fieldType: EnumFieldType;
-    showInQuickFilter: boolean;
-    required: boolean;
-    autoCreateSelectListFromData: boolean;
-    selectList: SelectModel[];
 
-}
-
-export interface ITableModel {
-
-    getUrl?: string;
-    addUrl?: string;
-    updateUrl?: string;
-    deleteUrl?: string;
-    columns: IColumnModel[];
-    data: any[];
-    enableQuickFilterBy: boolean;
-    enablePaging: boolean;
-    enableSorting: boolean;
-    enableFiltering: boolean;
-    enableExport: boolean;
-    editType: EnumEditType;
-    enableServerSideFiltering: boolean;
-    enableServerSideSorting: boolean;
-    enableServerSideQuickFilterBy: boolean;
-    enableServerSidePaging: boolean;
-    enableServerSideExport: boolean;
-    sortIcon: string;
-    sortDescIcon: string;
-    sortAscIcon: string;
-    cssClass: Object;
-    headerCssClass: Object;
-    rowCssClass: Object;
-    style: Object;
-    rowStyle: Object;
-    headerStyle: Object;
-    pagination: PaginationModel;
-
-}
 export class SelectModel implements ISelectModel {
     public key: string = '';
     public value: string = '';
 }
-export class TableModel implements ITableModel {
+export class TableModel {
     public enableQuickFilterBy: boolean = true;
     public enablePaging: boolean = true;
     public enableSorting: boolean = true;
@@ -132,12 +85,25 @@ export class TableModel implements ITableModel {
     public cssClassColumnChooser: string = 'sui-btn sui-theme';
     public columnChooserText: string = 'Choose Columns';
 
+    public canEdit: boolean = true;
+    public canAdd: boolean = true;
+    public canDelete: boolean = true;
+
+    public getUrl?: string;
+    public addUrl?: string;
+    public updateUrl?: string;
+    public deleteUrl?: string;
+
+    public txtAddBtn: string = 'Add New';
+    public cssAddBtn: string = 'sui-btn';
+    public cssAddIcon: string = 'fa fa-plus-circle';
+
     public cssEditIcon: string = 'fa fa-edit';
     public cssDeleteIcon: string = 'fa fa-times';
-    constructor(public columns: IColumnModel[] = [], public data: any[] = []) { }
+    constructor(public columns: ColumnModel[] = [], public data: any[] = []) { }
 }
 
-export class ColumnModel implements IColumnModel {
+export class ColumnModel {
     public hidden: boolean = false;
     public canFilter: boolean = true;
     public canSort: boolean = true;
@@ -148,7 +114,7 @@ export class ColumnModel implements IColumnModel {
     public filterInputCssClass: string = 'sui-input';
     public autoCreateSelectListFromData: boolean = true;
     public required: boolean = true;
-    public showInQuickFilter: boolean= false;
+    public showInQuickFilter: boolean = false;
     constructor(public fieldName: string,
         public displayName: string,
         public fieldType: EnumFieldType = EnumFieldType.text) { }

@@ -1,6 +1,22 @@
-<ul class="sui-navbar sui-hide-mobile sui-hide-tablet sui-left-align">
+<ul [ngStyle]="nav.style" class="{{'sui-navbar sui-hide-mobile sui-hide-tablet sui-left-align ' + nav.cssClass}}">
+    <li>
+        <a href="/">
+            <img *ngIf="nav.brandLogoPath" src="{{nav.brandLogoPath}}">
+            <span *ngIf="!nav.brandLogoPath"> {{nav.brand}} </span>
+            <span *ngIf="nav.showBothBrandAndLogo">
+              <img *ngIf="nav.brandLogoPath" src="{{nav.brandLogoPath}}">
+              <span class="sui-margin-left sui-margin-right"> {{nav.brand}} </span>
+            </span>
+        </a>
+    </li>
     <li *ngFor="let item of nav.links">
-        <a routerLink="{{item.routerLink}}" routerLinkActive="active">{{item.displayName}}</a>
+        <a routerLink="{{item.routerLink}}" routerLinkActive="active" title="{{item.displayName}}" class="{{item.cssClass}}" [ngStyle]="item.style">
+            <i *ngIf="item.icon" class="{{item.icon}}"> </i>
+            <span *ngIf="item.showBothIconText">  
+                <i *ngIf="item.icon" class="{{item.icon}}"> </i> {{item.displayName}} 
+            </span>
+            <span *ngIf="!item.icon"> {{item.displayName}}  </span>
+        </a>
     </li>
 </ul>
 <div class="sui-hide-desktop-xl sui-hide-desktop">
@@ -10,8 +26,24 @@
         </li>
     </ul>
 </div>
-<ul *ngIf="showSmallMenu" class="sui-navbar sui-left-align sui-large ">
+<ul *ngIf="showSmallMenu" [ngStyle]="nav.style" class="{{'sui-navbar sui-left-align ' + nav.cssClass}} ">
+    <li>
+        <a href="/">
+            <img *ngIf="nav.brandLogoPath" src="{{nav.brandLogoPath}}">
+            <span *ngIf="!nav.brandLogoPath"> {{nav.brand}} </span>
+            <span *ngIf="nav.showBothBrandAndLogo">
+              <img *ngIf="nav.brandLogoPath" src="{{nav.brandLogoPath}}">
+              <span class="sui-margin-left sui-margin-right"> {{nav.brand}} </span>
+            </span>
+        </a>
+    </li>
     <li *ngFor="let item of nav.links">
-        <a routerLink="{{item.routerLink}}" routerLinkActive="active">{{item.displayName}}</a>
+        <a routerLink="{{item.routerLink}}" routerLinkActive="active" title="{{item.displayName}}" class="{{item.cssClass}}" [ngStyle]="item.style">
+            <i *ngIf="item.icon" class="{{item.icon}}"> </i>
+            <span *ngIf="item.showBothIconText">  
+                <i *ngIf="item.icon" class="{{item.icon}}"> </i> {{item.displayName}} 
+            </span>
+            <span *ngIf="!item.icon"> {{item.displayName}}  </span>
+        </a>
     </li>
 </ul>

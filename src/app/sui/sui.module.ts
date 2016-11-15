@@ -10,8 +10,11 @@ import { FilterPipe } from './sui.util/sui.util.filter.pipe';
 import { OrderByPipe } from './sui.util/sui.util.orderBy.pipe';
 import { VisiblePipe } from './sui.util/sui.util.visible.pipe';
 import { PagingPipe } from './sui.util/sui.util.paging.pipe';
+import { DeletePipe } from './sui.util/sui.util.delete.pipe';
+
 import { ModalComponent } from './sui.modal/sui.modal.component';
 import { ConfirmModalComponent } from './sui.modal/sui.confirm.modal.component';
+
 
 
 import {
@@ -27,7 +30,7 @@ import {
         OrderByPipe,
         PagingPipe,
         VisiblePipe,
-
+        DeletePipe,
         ModalComponent,
         NavigationComponent,
         RatingComponent,
@@ -44,7 +47,7 @@ import {
         RouterModule,
         FilterPipe,
         OrderByPipe,
-
+        DeletePipe,
         ModalComponent,
         TableComponent,
         NavigationComponent,

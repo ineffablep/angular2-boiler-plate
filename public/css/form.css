@@ -5,7 +5,7 @@ input[type=checkbox].sui-check {
   width: 24px;
 }
 input[type=checkbox].sui-check:checked + .sui-validate {
-  color: #009688;
+  color: #337ab7;
 }
 input[type=checkbox].sui-check:disabled + .sui-validate {
   color: #aaaaaa;
@@ -17,7 +17,7 @@ input[type=radio].sui-radio {
   width: 24px;
 }
 input[type=radio].sui-radio:checked + .sui-validate {
-  color: #009688;
+  color: #337ab7;
 }
 input[type=radio].sui-radio:disabled + .sui-validate {
   color: #aaaaaa;
@@ -44,7 +44,7 @@ input[type=radio].sui-radio:disabled + .sui-validate {
   padding: 8px;
 }
 .sui-label {
-  color: #009688;
+  color: #337ab7;
 }
 .sui-input:not(:valid) ~ .sui-validate {
   color: #f44336;
@@ -52,15 +52,15 @@ input[type=radio].sui-radio:disabled + .sui-validate {
 .sui-select {
   border: 1px solid transparent;
   color: #000000;
-  padding: 9px 0;
-  border-bottom: 1px solid #009688;
+  padding: 8.5px;
+  border-bottom: 1px solid #dddddd;
 }
 .sui-select select:focus {
-  border: 1px solid #009688;
+  border: 1px solid #337ab7;
   color: #000000;
 }
 .sui-select option[disabled] {
-  color: #009688;
+  color: #337ab7;
 }
 .sui-dropdown-click {
   cursor: pointer;

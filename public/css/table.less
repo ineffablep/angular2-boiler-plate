@@ -68,11 +68,18 @@
 		}
 	}
 }
-.sui-table td, .sui-table th, .sui-table-all td, .sui-table-all th  {
+ .sui-table th, .sui-table-all th  {
 	display: table-cell;
-	padding: 16px;
-	text-align: left;
+	padding-left: 24px;
+	text-align: center;
 	vertical-align: top;
+	white-space: nowrap;
+}
+.sui-table td, .sui-table-all td  {
+	display: table-cell;
+	padding-left: 24px;
+	text-align: left;
+	vertical-align: middle;
 	white-space: nowrap;
 }
 .sui-table th:first-child, .sui-table td:first-child, .sui-table-all th:first-child, .sui-table-all td:first-child  {
@@ -80,11 +87,13 @@
 }
 input[type=checkbox].sui-table-check {
   height: 16px;
-  width: 16px;
-}
-.sui-table td  input[type=checkbox].sui-table-check {
  text-align: center; 
-    vertical-align: middle; 
+ vertical-align: middle; 
+ width: 100%
+}
+.sui-table td  input[type=checkbox] {
+ text-align: center; 
+ vertical-align: middle; 
 }
 .sui-pagination {
 	display: inline-block;

@@ -1,3 +1,27 @@
+.sui-tiny {
+  font-size: 10px !important;
+}
+.sui-small {
+  font-size: 12px !important;
+}
+.sui-medium {
+  font-size: 15px !important;
+}
+.sui-large {
+  font-size: 18px !important;
+}
+.sui-xlarge {
+  font-size: 24px !important;
+}
+.sui-xxlarge {
+  font-size: 36px !important;
+}
+.sui-xxxlarge {
+  font-size: 48px !important;
+}
+.sui-jumbo {
+  font-size: 64px !important;
+}
 .sui-circle {
   border-radius: 50%!important;
 }

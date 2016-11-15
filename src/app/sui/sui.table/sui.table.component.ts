@@ -2,7 +2,7 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { FilterModel } from '../sui.util/sui.util.filter.model';
 import { FormBase, TextboxField, DropdownField } from '../sui.form/sui.form.component';
 import {
-    ITableModel, IColumnModel, ISelectModel, SelectModel,
+    TableModel, ColumnModel, ISelectModel, SelectModel,
     EnumFieldType, EnumEditType
 } from './sui.table.model';
 import { SuiHttpService } from '../sui.util/sui.util.httpService';
@@ -13,7 +13,7 @@ import { SuiHttpService } from '../sui.util/sui.util.httpService';
     providers: [SuiHttpService]
 })
 export class TableComponent implements OnInit {
-    @Input() tableModel: ITableModel;
+    @Input() tableModel: TableModel;
 
     @Output() updateRecord: EventEmitter<any> = new EventEmitter<any>();
     @Output() addRecord: EventEmitter<any> = new EventEmitter<any>();
@@ -38,6 +38,9 @@ export class TableComponent implements OnInit {
     isEditRow: boolean = false;
     isAddRow: boolean = false;
     errorMessage: string = '';
+    modalHeaderText: string = '';
+    deleteIndex?: number;
+    tableData: any[];
     constructor(private suiHttpService: SuiHttpService) { }
 
 
@@ -69,22 +72,28 @@ export class TableComponent implements OnInit {
 
     getData() {
         if (this.tableModel.data && this.tableModel.data.length) {
-            return this.tableModel.data;
+            this.tableData = this.tableModel.data;
         } else if (this.tableModel.getUrl) {
             this.suiHttpService.get(this.tableModel.getUrl).subscribe(data => {
-                this.tableModel.data = data;
+                this.tableData = data;
             });
         }
-        return [];
+        return this.tableData;
     }
 
     onpageSizeChange(event: any) {
-      this.pageSize = event.target.value;
-      this.getPages();
+        this.pageSize = event.target.value;
+        this.getPages();
     }
+
     onEditRow(row: any) {
         this.setFormFields(row);
-        this.isEditRow = true;
+        if (row) {
+            this.isEditRow = true;
+            this.modalHeaderText = 'Edit record';
+        } else {
+            this.modalHeaderText = 'Add new record';
+        }
         if (this.tableModel.editType === 2) {
             this.showDialog = !this.showDialog;
         } else if (this.tableModel.editType === 3) {
@@ -102,8 +111,8 @@ export class TableComponent implements OnInit {
     deleteRowFromTable(row: any) {
         let id = this.getIdentityValue(row);
         let identityField = this.getIdentityField();
-        this.tableModel.data = this.tableModel.data.filter(y => {
-            return this.tableModel.data[identityField.fieldName] === id;
+        this.deleteIndex = this.tableData.findIndex(y => {
+            return y[identityField.fieldName] === id;
         });
     }
 
@@ -134,11 +143,11 @@ export class TableComponent implements OnInit {
 
             } else if (this.isAddRow) {
                 if (!this.tableModel.addUrl) {
-                    this.tableModel.data.push(object);
+                    this.tableData.push(object);
                     this.addRecord.emit(object);
                 } else {
                     this.suiHttpService.add(object, this.tableModel.addUrl)
-                        .subscribe(obj => this.tableModel.data.push(obj),
+                        .subscribe(obj => this.tableData.push(obj),
                         error => this.errorMessage = <any>error);
                 }
             }
@@ -198,14 +207,14 @@ export class TableComponent implements OnInit {
         }
     }
 
-    getSelectList(column: IColumnModel) {
+    getSelectList(column: ColumnModel) {
         let data: ISelectModel[] = [];
         let opt = new SelectModel();
         opt.key = '';
-        opt.value = 'Choose Option...';
+        opt.value = '';
         data.push(opt);
         if (column.autoCreateSelectListFromData) {
-            for (let item of this.tableModel.data) {
+            for (let item of this.tableData) {
                 let value = item[column.fieldName];
                 let exist = data.find(y => y.value === value);
                 if (exist === undefined) {
@@ -221,7 +230,7 @@ export class TableComponent implements OnInit {
         return data;
     }
 
-    onColumnChooserClick(column: IColumnModel) {
+    onColumnChooserClick(column: ColumnModel) {
         if (!this.hiddenFields.includes(column.fieldName)) {
             this.hiddenFields.push(column.fieldName);
         } else {
@@ -229,13 +238,13 @@ export class TableComponent implements OnInit {
         }
     }
 
-    showColumnIcon(column: IColumnModel) {
+    showColumnIcon(column: ColumnModel) {
         let exist = this.hiddenFields.find(y => y === column.fieldName);
         if (exist === undefined)
             return true;
     }
 
-    onSortClick(column: IColumnModel) {
+    onSortClick(column: ColumnModel) {
         if (column.canSort) {
             this.sortKey = column.fieldName;
             this.descOrder = !this.descOrder;
@@ -275,7 +284,7 @@ export class TableComponent implements OnInit {
     getTableRowById(id: any) {
         let ideityField = this.getIdentityField();
         if (ideityField) {
-            this.tableModel.data.find(y => {
+            this.tableData.find(y => {
                 return y[ideityField.fieldName] === id;
             });
         } else {
@@ -296,7 +305,7 @@ export class TableComponent implements OnInit {
         this.fields = [];
         this.tableModel.columns.forEach(y => {
             if (y.fieldName !== '_id' && y.fieldName !== 'index' && y.canEdit) {
-                let val = row[y.fieldName];
+                let val = row ? row[y.fieldName] : '';
                 let fieldType = this.getType(y.fieldType);
                 if (fieldType === 'select') {
                     let selectList = this.getSelectList(y);

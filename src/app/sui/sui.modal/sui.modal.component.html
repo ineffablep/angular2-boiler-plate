@@ -1,6 +1,6 @@
 <div [@modal] *ngIf="visible" class="sui-modal">
     <div class="sui-modal-content">
-        <header class="{{cssClassHeader}}">
+        <header class="{{'sui-padding-left '+cssClassHeader}}">
             <button *ngIf="closable" (click)="close()" aria-label="Close" class="sui-closebtn">X</button>
             <h3> <i class="{{headerIcon}}"> </i> {{headerText}}</h3>
         </header>
