@@ -14,14 +14,9 @@ import { DeletePipe } from './sui.util/sui.util.delete.pipe';
 
 import { ModalComponent } from './sui.modal/sui.modal.component';
 import { ConfirmModalComponent } from './sui.modal/sui.confirm.modal.component';
+import { FormComponent } from './sui.form/sui.form.component';
+import { AddPipe } from './sui.util/sui.util.add.pipe';
 
-
-
-import {
-    DropdownField,
-    TextboxField,
-    FormComponent
-} from './sui.form/sui.form.component';
 
 
 @NgModule({
@@ -31,6 +26,7 @@ import {
         PagingPipe,
         VisiblePipe,
         DeletePipe,
+        AddPipe,
         ModalComponent,
         NavigationComponent,
         RatingComponent,
@@ -48,6 +44,7 @@ import {
         FilterPipe,
         OrderByPipe,
         DeletePipe,
+        AddPipe,
         ModalComponent,
         TableComponent,
         NavigationComponent,

@@ -113,7 +113,7 @@ export class ColumnModel {
     public selectList: SelectModel[] = [];
     public filterInputCssClass: string = 'sui-input';
     public autoCreateSelectListFromData: boolean = true;
-    public required: boolean = true;
+    public required: boolean = false;
     public showInQuickFilter: boolean = false;
     constructor(public fieldName: string,
         public displayName: string,

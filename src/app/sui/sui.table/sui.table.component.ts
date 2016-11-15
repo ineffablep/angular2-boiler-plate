@@ -1,11 +1,11 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { FilterModel } from '../sui.util/sui.util.filter.model';
-import { FormBase, TextboxField, DropdownField } from '../sui.form/sui.form.component';
 import {
     TableModel, ColumnModel, ISelectModel, SelectModel,
     EnumFieldType, EnumEditType
 } from './sui.table.model';
 import { SuiHttpService } from '../sui.util/sui.util.httpService';
+import { FormBase, DropdownField, TextboxField } from '../sui.util/sui.util.formBase';
 
 @Component({
     selector: 'sui-table',
@@ -41,6 +41,7 @@ export class TableComponent implements OnInit {
     modalHeaderText: string = '';
     deleteIndex?: number;
     tableData: any[];
+    rowToAdd: any;
     constructor(private suiHttpService: SuiHttpService) { }
 
 
@@ -92,6 +93,7 @@ export class TableComponent implements OnInit {
             this.isEditRow = true;
             this.modalHeaderText = 'Edit record';
         } else {
+            this.isAddRow = true;
             this.modalHeaderText = 'Add new record';
         }
         if (this.tableModel.editType === 2) {
@@ -118,13 +120,21 @@ export class TableComponent implements OnInit {
 
     updateTableRow(row: any) {
         let id = this.getIdentityValue(row);
-        let rowToUpdate = this.getTableRowById(id);
-        this.tableModel.columns.forEach(col => {
-            rowToUpdate[col.fieldName] = row[col.fieldName];
-        });
+        let identityField = this.getIdentityField();
+        if (id) {
+            let rowToUpdate = this.tableData.find(y => {
+                return y[identityField.fieldName] === id;
+            });
+            if (rowToUpdate) {
+                this.tableModel.columns.forEach(col => {
+                    rowToUpdate[col.fieldName] = row[col.fieldName];
+                });
+            }
+        }
     }
 
     saveForm(object: any) {
+        let val = JSON.stringify(object);
         this.showTable = true;
         this.showForm = false;
         this.showDialog = false;
@@ -132,8 +142,8 @@ export class TableComponent implements OnInit {
         } else {
             if (this.isEditRow) {
                 if (!this.tableModel.updateUrl) {
-                    this.updateRecord.emit(object);
                     this.updateTableRow(object);
+                    this.updateRecord.emit(object);
                 } else {
                     let url = this.tableModel.updateUrl;
                     this.suiHttpService.update(object, url).subscribe(res => {
@@ -143,13 +153,14 @@ export class TableComponent implements OnInit {
 
             } else if (this.isAddRow) {
                 if (!this.tableModel.addUrl) {
-                    this.tableData.push(object);
+                    this.rowToAdd = object;
                     this.addRecord.emit(object);
                 } else {
                     this.suiHttpService.add(object, this.tableModel.addUrl)
                         .subscribe(obj => this.tableData.push(obj),
                         error => this.errorMessage = <any>error);
                 }
+
             }
         }
     }
@@ -281,16 +292,6 @@ export class TableComponent implements OnInit {
         return null;
     }
 
-    getTableRowById(id: any) {
-        let ideityField = this.getIdentityField();
-        if (ideityField) {
-            this.tableData.find(y => {
-                return y[ideityField.fieldName] === id;
-            });
-        } else {
-            return {};
-        }
-    }
 
     getIdentityValue(row: any) {
         let ideityField = this.getIdentityField();
@@ -304,37 +305,41 @@ export class TableComponent implements OnInit {
         let order = 1;
         this.fields = [];
         this.tableModel.columns.forEach(y => {
-            if (y.fieldName !== '_id' && y.fieldName !== 'index' && y.canEdit) {
-                let val = row ? row[y.fieldName] : '';
-                let fieldType = this.getType(y.fieldType);
-                if (fieldType === 'select') {
-                    let selectList = this.getSelectList(y);
-                    let options: any[] = [];
-                    selectList.forEach(z => {
-                        options.push({ key: z.key, value: z.value });
-                    });
-                    this.fields.push(new DropdownField({
+
+            let val = row ? row[y.fieldName] : '';
+            let fieldType = this.getType(y.fieldType);
+            if (fieldType === 'select') {
+                let selectList = this.getSelectList(y);
+                let options: any[] = [];
+                selectList.forEach(z => {
+                    options.push({ key: z.key, value: z.value });
+                });
+                this.fields.push(new DropdownField({
+                    key: y.fieldName,
+                    label: y.displayName,
+                    options: options,
+                    value: val,
+                    disabled: y.fieldName === '_id' || !y.canEdit || y.identityField,
+                    readonly: y.fieldName === '_id' || !y.canEdit || y.identityField,
+                    order: order
+                }));
+            } else {
+                this.fields.push(
+                    new TextboxField({
                         key: y.fieldName,
                         label: y.displayName,
-                        options: options,
+                        type: fieldType,
+                        required: y.required,
                         value: val,
+                        disabled: y.fieldName === '_id' || !y.canEdit || y.identityField,
+                        readonly: y.fieldName === '_id' || !y.canEdit || y.identityField,
+                        placeholder: y.displayName,
                         order: order
-                    }));
-                } else {
-                    this.fields.push(
-                        new TextboxField({
-                            key: y.fieldName,
-                            label: y.displayName,
-                            type: fieldType,
-                            required: y.required,
-                            value: val,
-                            placeholder: y.displayName,
-                            order: order
-                        }),
-                    );
-                    order = order + 1;
-                }
+                    }),
+                );
+                order = order + 1;
             }
+
         });
     }
 }

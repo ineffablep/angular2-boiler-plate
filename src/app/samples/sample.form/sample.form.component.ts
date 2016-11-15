@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TextboxField, DropdownField, FormBase } from '../../sui/sui.form/sui.form.component';
+import { FormBase, TextboxField, DropdownField } from '../../sui/sui.util/sui.util.formBase';
 
 @Component({
   templateUrl: './sample.form.component.html'
