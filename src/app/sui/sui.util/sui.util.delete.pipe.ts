@@ -8,5 +8,6 @@ export class DeletePipe implements PipeTransform {
         if (index && items) {
             items.splice(index, 1);
         }
+        return items;
     }
 }
