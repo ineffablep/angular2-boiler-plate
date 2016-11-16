@@ -19,10 +19,10 @@
 @selected-color:@theme ;// select, radio buttons and checkboxes selected color
 @label-color:@theme;
 @progressbar-color:@theme;
-@table-background-color:#eeeeee;
+@table-background-color:@bg-color;
 @table-border:@border;
-@table-odd:#eeeeee;
-@table-even:#dcdcdc;
+@table-odd:@hover;
+@table-even:@bg-color;
 @table-striped:@hover;
 @table-striped:@table-even;
 @table-hover: @hover-dark;
@@ -35,9 +35,6 @@
 @star-size:34px;
 @star-checked-color:#FFED85;
 @star-disabled-color:@disabled;
-
-
-
 @highdensity: ~"only screen and (-webkit-min-device-pixel-ratio: 1.5)",
               ~"only screen and (min--moz-device-pixel-ratio: 1.5)",
               ~"only screen and (-o-min-device-pixel-ratio: 3/2)",

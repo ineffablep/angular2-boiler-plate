@@ -1,0 +1,13 @@
+<div class="{{'sui-panel ' + panelClass}}" 
+    [ngStyle]="panelStyle" *ngIf="!isClosed">
+    <div class="sui-containter">
+        <header class="{{'sui-padding-left '+cssClassHeader}}">
+            <button *ngIf="closable" (click)="onClose()" aria-label="Close" class="sui-closebtn">X</button>
+            <h3 class="{{headerClass}}" [ngStyle]="headerStyle" > <i class="{{headerIcon}}"> </i> {{headerText}}</h3>
+        </header>
+    </div>
+    <div class="sui-container sui-margin-top">
+        <ng-content></ng-content>
+    </div>
+    <br/>
+</div>

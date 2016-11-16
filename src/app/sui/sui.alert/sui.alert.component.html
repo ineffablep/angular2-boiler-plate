@@ -1,7 +1,7 @@
-<div class="{{'sui-panel ' + cssClass}}" *ngIf="!isClosed && message && message.length">
+<div class="{{'sui-panel ' + cssClass}}" [ngStyle]="alertStyle" *ngIf="!isClosed && message && message.length">
     <div class="sui-padding">
         <span (click)="onClose(event)" class="sui-closebtn">&times;</span>
-        <h3>{{heading}}</h3>
-        <div  [innerHTML]="message"></div>
+        <h3 class="{{headerClass}}" [ngStyle]="headingtStyle">{{heading}}</h3>
+        <div class="{{messageClass}}" [ngStyle]="messagetStyle" [innerHTML]="message"></div>
     </div>
 </div>

@@ -18,6 +18,7 @@ import { FormComponent } from './sui.form/sui.form.component';
 import { AddPipe } from './sui.util/sui.util.add.pipe';
 import { InputComponent } from './sui.form/sui.input.component';
 import { Alertomponent } from './sui.alert/sui.alert.component';
+import { PanelComponent } from './sui.panel/sui.panel.component';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { Alertomponent } from './sui.alert/sui.alert.component';
         TableComponent,
         ConfirmModalComponent,
         InputComponent,
+        PanelComponent,
         FormComponent],
     imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
     exports: [
@@ -54,6 +56,7 @@ import { Alertomponent } from './sui.alert/sui.alert.component';
         RatingComponent,
         ConfirmModalComponent,
         InputComponent,
+        PanelComponent,
         FormComponent
     ]
 })
