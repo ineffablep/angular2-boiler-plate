@@ -12,19 +12,18 @@ import { AlertType } from '../sui.alert/sui.alert.component';
 export class FormComponent {
     @Input() fields: FormBase[] = [];
     @Output('send') submitted: EventEmitter<any> = new EventEmitter();
-    isFormValid: boolean = false;
-    validationMessage: string = '';
+    validationSummary: string = '';
     alertType: AlertType = AlertType.error;
     constructor(private _validator: ValidatiorService) { }
 
-    checkFormValid(event: any): boolean {
+    validateForm(): boolean {
         let isFormValid = true;
         this.fields.forEach(y => {
             let fv = this._validator.checkFieldValid(y);
             if (!fv.valid) {
                 {
                     isFormValid = false;
-                    this.validationMessage += ' ' + fv.errorMessage;
+                    this.validationSummary += ' <br> ' + fv.errorMessage;
                 }
             }
         });
@@ -32,8 +31,9 @@ export class FormComponent {
     }
 
     onSuiFormSubmit() {
-        this.validationMessage = '';
-        if (this.isFormValid) {
+        this.validationSummary = '';
+        let isFormValid = this.validateForm();
+        if (isFormValid) {
             let obj = {};
             this.fields.forEach(y => {
                 obj[y.key] = y.value;

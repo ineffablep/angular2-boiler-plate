@@ -1,4 +1,10 @@
-export class FilterModel {
+export class FilterKeyValue {
     key: string;
-    filter: string;
+    value: string;
+}
+export class FilterModel {
+    keyValues: FilterKeyValue[] = [];
+    orCondition: boolean = false;
+    serversideFiltering: boolean = false;
+    serversideUrl?: string;
 }

@@ -6,7 +6,7 @@
         [type]="field.type" 
         class="sui-input" 
         [(ngModel)]="field.value" 
-        (blur)="isValid(field)" 
+        (blur)="validateField(field)" 
         [placeholder]="field.placeholder"
         [disabled]="field.disabled"
         [readonly]="field.readonly">
@@ -17,17 +17,25 @@
         type="checkbox" 
         class="sui-checkbox" 
         [(ngModel)]="field.value"
-        (ngModelChange)="isValid(field)" 
+        (ngModelChange)="validateField(field)" 
         [disabled]="field.disabled" 
         [readonly]="field.readonly">
-        
-<!--<input *ngIf="field.type=='radio'" 
+
+<p *ngIf="field.type=='radio'">
+<label  *ngFor="let item of field.options" class="sui-validate"> 
+     <input 
         [name]="field.key" 
         type="radio" 
         class="sui-radio" 
-        [value]="field.value"
+        [value]="item"
+        (click)="field.value=item"
+        [checked]=" field.value && item && item ==field.value"
         [disabled]="field.disabled" 
-        [readonly]="field.readonly">-->
+        [readonly]="field.readonly">   
+        {{item}} <br>
+</label>
+</p>
+
         
         
 <input *ngIf="field.type=='file'" 
@@ -47,11 +55,11 @@
     <select [id]="field.key" 
             [name]="field.key" 
             [(ngModel)]="field.value" 
-             (blur)="isValid(field)" 
+             (blur)="validateField(field)" 
             *ngIf="field.controlType=='dropdown'" 
             class="sui-select">
                         <option style="display:none" value="">Choose an option</option>
                         <option *ngFor="let opt of field.options" [value]="opt.key">{{opt.value}}</option>
     </select>
 </p>
-<span *ngIf="!validate.valid" class="sui-text-error"> {{validate.errorMessage}} </span>
+<span *ngIf="!isValid && validationMessage.length" class="sui-text-error"> {{validationMessage}} </span>

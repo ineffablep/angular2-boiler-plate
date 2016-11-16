@@ -1,11 +1,12 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { FilterModel } from '../sui.util/sui.util.filter.model';
+import { FilterModel, FilterKeyValue } from '../sui.util/sui.util.filter.model';
 import {
     TableModel, ColumnModel, ISelectModel, SelectModel,
     EnumFieldType, EnumEditType
 } from './sui.table.model';
 import { SuiHttpService } from '../sui.util/sui.util.httpService';
 import { FormBase, DropdownField, TextboxField } from '../sui.util/sui.util.formBase';
+import { AlertType } from '../sui.alert/sui.alert.component';
 
 @Component({
     selector: 'sui-table',
@@ -19,7 +20,7 @@ export class TableComponent implements OnInit {
     @Output() addRecord: EventEmitter<any> = new EventEmitter<any>();
     @Output() deleteRecord: EventEmitter<any> = new EventEmitter<any>();
 
-    filters: FilterModel[] = [];
+    filters: FilterModel = new FilterModel();
     hiddenFields: string[] = [];
     sortKey: string;
     descOrder: boolean;
@@ -27,7 +28,7 @@ export class TableComponent implements OnInit {
     currentPage: number;
     pageSize: number;
     totalPageCount: number;
-    filterOrCondition: boolean = false;
+    filterOrCondition: boolean;
     showDialog: boolean = false;
     fields: FormBase[] = [];
     deleteConfirmMessage: string = 'Are you Sure, You want to delete record?';
@@ -42,6 +43,7 @@ export class TableComponent implements OnInit {
     deleteIndex?: number;
     tableData: any[];
     rowToAdd: any;
+     alertType: AlertType = AlertType.error;
     constructor(private suiHttpService: SuiHttpService) { }
 
 
@@ -61,23 +63,25 @@ export class TableComponent implements OnInit {
 
     getPages() {
         let data = this.getData();
-        let noOfPages = data.length / this.pageSize;
-        this.totalPageCount = noOfPages;
-        let pageNumbers: any = [];
-        let i = 1;
-        while (i <= noOfPages) {
-            pageNumbers.push(i++);
+        if (data) {
+            let noOfPages = data.length / this.pageSize;
+            this.totalPageCount = noOfPages;
+            let pageNumbers: any = [];
+            let i = 1;
+            while (i <= noOfPages) {
+                pageNumbers.push(i++);
+            }
+            return pageNumbers;
         }
-        return pageNumbers;
     }
 
     getData() {
         if (this.tableModel.data && this.tableModel.data.length) {
             this.tableData = this.tableModel.data;
         } else if (this.tableModel.getUrl) {
-            this.suiHttpService.get(this.tableModel.getUrl).subscribe(data => {
+            this.suiHttpService.get(this.tableModel.getUrl, false).subscribe(data => {
                 this.tableData = data;
-            });
+            }, error => this.errorMessage = <any>error);
         }
         return this.tableData;
     }
@@ -193,29 +197,35 @@ export class TableComponent implements OnInit {
 
     onFilterChange(event: any, key: string) {
         let value = event.target.value;
+        let filterModel = new FilterModel();
         if (key === 'search') {
-            this.filters = [];
+            let keyValues: FilterKeyValue[] = [];
             this.getColumns().forEach(y => {
                 if (y.canFilter) {
-                    let filter = new FilterModel();
+                    let filter = new FilterKeyValue();
                     filter.key = y.fieldName;
-                    filter.filter = value;
-                    this.filters.push(filter);
+                    filter.value = value;
+                    keyValues.push(filter);
                 }
             });
-            this.filterOrCondition = true;
+            filterModel.keyValues = keyValues;
+            filterModel.orCondition = true;
         } else {
-            let filter = new FilterModel();
-            let prop = this.filters.find(y => y.key === key);
+
+            let prop = this.filters.keyValues.find(y => y.key === key);
             if (prop) {
-                prop.filter = value;
+                prop.value = value;
             } else {
-                filter.key = key;
-                filter.filter = value;
-                this.filters.push(filter);
+                prop = new FilterKeyValue();
+                prop.key = key;
+                prop.value = value;
+                this.filters.keyValues.push(prop);
             }
-            this.filterOrCondition = false;
+            filterModel.keyValues = this.filters.keyValues;
+            filterModel.orCondition = false;
         }
+        this.filters = filterModel;
+
     }
 
     getSelectList(column: ColumnModel) {

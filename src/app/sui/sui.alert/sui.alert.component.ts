@@ -15,7 +15,6 @@ export class Alertomponent implements OnInit {
         this.isClosed = true;
     }
     ngOnInit() {
-        debugger;
         if (this.type === AlertType.success) {
             this.cssClass = 'sui-success';
         } else if (this.type === AlertType.error) {

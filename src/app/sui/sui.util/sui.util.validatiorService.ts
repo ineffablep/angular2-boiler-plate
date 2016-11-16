@@ -18,11 +18,11 @@ export class ValidatiorService {
           vm.valid = true;
         }
       } else {
-          vm.valid = false;
-          vm.errorMessage = field.label + ' is required';
+        vm.valid = false;
+        vm.errorMessage = field.label + ' is required';
       }
     } else {
-          vm.valid = true;
+      vm.valid = true;
     }
 
     return vm;
@@ -32,8 +32,10 @@ export class ValidatiorService {
     let reqValid = this.checkRequired(field);
     if (reqValid.valid) {
       if (field.type === 'email') {
-        reqValid.valid = this.checkValidEmail(field.value);
-        reqValid.errorMessage = 'Invalid Email Address';
+        let vm = new ValidatorModal();
+        vm.valid = this.checkValidEmail(field.value);
+        vm.errorMessage = 'Invalid Email Address';
+        return vm;
       }
     }
     return reqValid;

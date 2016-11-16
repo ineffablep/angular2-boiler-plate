@@ -6,19 +6,20 @@ import { FilterModel } from './sui.util.filter.model';
     name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
-    transform(items: any[], filters: FilterModel[], orCondition: boolean = false): any {
-        if (filters && filters.length) {
-            if (!orCondition) {
-                for (let filter of filters) {
+    transform(items: any[], filter: FilterModel): any {
+        if (filter && filter.keyValues && filter.keyValues.length) {
+            if (!filter.orCondition) {
+                for (let ft of filter.keyValues) {
+                    debugger;
                     items = items.filter(item => {
-                        return contains(item[filter.key], filter.filter);
+                        return contains(item[ft.key], ft.value);
                     });
                 }
             } else {
                 let res: any[] = [];
                 for (let item of items) {
-                    for (let filter of filters) {
-                        if (contains(item[filter.key], filter.filter))
+                    for (let ft of filter.keyValues) {
+                        if (contains(item[ft.key], ft.value))
                             res.push(item);
                     }
                 }
@@ -30,6 +31,8 @@ export class FilterPipe implements PipeTransform {
 }
 
 export function contains(val: Object, search: Object) {
+    debugger;
+
     if (!search)
         return true;
     if (typeof val === 'string') {
