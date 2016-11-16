@@ -17,6 +17,7 @@ import { ConfirmModalComponent } from './sui.modal/sui.confirm.modal.component';
 import { FormComponent } from './sui.form/sui.form.component';
 import { AddPipe } from './sui.util/sui.util.add.pipe';
 import { InputComponent } from './sui.form/sui.input.component';
+import { Alertomponent } from './sui.alert/sui.alert.component';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { InputComponent } from './sui.form/sui.input.component';
         DeletePipe,
         AddPipe,
         ModalComponent,
+        Alertomponent,
         NavigationComponent,
         RatingComponent,
         TableComponent,
@@ -48,6 +50,7 @@ import { InputComponent } from './sui.form/sui.input.component';
         ModalComponent,
         TableComponent,
         NavigationComponent,
+        Alertomponent,
         RatingComponent,
         ConfirmModalComponent,
         InputComponent,

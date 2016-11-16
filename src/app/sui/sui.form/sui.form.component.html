@@ -1,5 +1,6 @@
 <div class="sui-container">
     <form role="form" class="sui-form">
+        <sui-alert [message]="validationMessage" [type]="alertType" heading="Error !" > </sui-alert>
         <div *ngFor="let field of fields" class="sui-row">
             <sui-input [field]="field" (valid)="checkFormValid($event)"> </sui-input>
         </div>

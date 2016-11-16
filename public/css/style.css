@@ -1485,7 +1485,19 @@ input[type=radio].sui-radio:disabled + .sui-validate {
   padding: 6px 16px;
 }
 .sui-text-error {
-  color: red;
+  color: #f44336;
+}
+.sui-danger {
+  background: #f44336;
+  color: white;
+}
+.sui-success {
+  background: #4caf50;
+  color: white;
+}
+.sui-info {
+  background: #87ceeb;
+  color: white;
 }
 .sui-table {
   border-collapse: collapse;

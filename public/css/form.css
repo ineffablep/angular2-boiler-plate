@@ -5,7 +5,7 @@ input[type=checkbox].sui-check {
   width: 24px;
 }
 input[type=checkbox].sui-check:checked + .sui-validate {
-  color: #337ab7;
+  color: linear-gradient(to bottom, #00adee 0%, #0096d1 100%);
 }
 input[type=checkbox].sui-check:disabled + .sui-validate {
   color: #aaaaaa;
@@ -17,7 +17,7 @@ input[type=radio].sui-radio {
   width: 24px;
 }
 input[type=radio].sui-radio:checked + .sui-validate {
-  color: #337ab7;
+  color: linear-gradient(to bottom, #00adee 0%, #0096d1 100%);
 }
 input[type=radio].sui-radio:disabled + .sui-validate {
   color: #aaaaaa;
@@ -44,7 +44,7 @@ input[type=radio].sui-radio:disabled + .sui-validate {
   padding: 8px;
 }
 .sui-label {
-  color: #337ab7;
+  color: linear-gradient(to bottom, #00adee 0%, #0096d1 100%);
 }
 .sui-input:not(:valid) ~ .sui-validate {
   color: #f44336;
@@ -56,11 +56,11 @@ input[type=radio].sui-radio:disabled + .sui-validate {
   border-bottom: 1px solid #dddddd;
 }
 .sui-select select:focus {
-  border: 1px solid #337ab7;
+  border: 1px solid linear-gradient(to bottom, #00adee 0%, #0096d1 100%);
   color: #000000;
 }
 .sui-select option[disabled] {
-  color: #337ab7;
+  color: linear-gradient(to bottom, #00adee 0%, #0096d1 100%);
 }
 .sui-dropdown-click {
   cursor: pointer;
@@ -91,5 +91,17 @@ input[type=radio].sui-radio:disabled + .sui-validate {
   padding: 6px 16px;
 }
 .sui-text-error {
-  color: red;
+  color: #f44336;
+}
+.sui-danger {
+  background: #f44336;
+  color: white;
+}
+.sui-success {
+  background: #4caf50;
+  color: white;
+}
+.sui-info {
+  background: #87ceeb;
+  color: white;
 }
