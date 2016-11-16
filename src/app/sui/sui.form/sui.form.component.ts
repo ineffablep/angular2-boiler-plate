@@ -1,30 +1,25 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBase } from '../sui.util/sui.util.formBase';
-import { Validatons } from '../sui.util/sui.util.validations';
+import { ValidatiorService } from '../sui.util/sui.util.validatiorService';
 
 @Component({
   selector: 'sui-form',
   templateUrl: './sui.form.component.html',
+  providers: [ValidatiorService]
+
 })
 export class FormComponent {
   @Input() fields: FormBase[] = [];
   @Output('send') submitted: EventEmitter<any> = new EventEmitter();
   isFormValid: boolean = false;
-  validator = new Validatons();
-  isValid(field: FormBase): boolean {
-    let isValid = this.validator.checkFieldValid(field);
-    if (isValid) {
-      this.isFormValid = this.checkFormValid();
-    }
-    return isValid;
-  }
 
+  constructor(private _validator: ValidatiorService) { }
 
-  checkFormValid(): boolean {
+  checkFormValid(event: any): boolean {
     let isFormValid = true;
     this.fields.forEach(y => {
-      let fv = this.validator.checkFieldValid(y);
-      if (!fv) {
+      let fv = this._validator.checkFieldValid(y);
+      if (!fv.valid) {
         isFormValid = false;
       }
     });

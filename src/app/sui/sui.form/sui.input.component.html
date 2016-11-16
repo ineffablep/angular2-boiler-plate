@@ -1,0 +1,49 @@
+<label [attr.for]="field.key" class="sui-label">{{field.label}}</label>
+
+<input *ngIf="field.type!='select' && field.type!='checkbox' && field.type!='file'" 
+        [id]="field.key" 
+        [name]="field.key"
+        [type]="field.type" 
+        class="sui-input" 
+        [(ngModel)]="field.value" 
+        (blur)="isValid(field)" 
+        [placeholder]="field.placeholder"
+        [disabled]="field.disabled"
+        [readonly]="field.readonly">
+
+<input *ngIf="field.type=='checkbox'" 
+        [id]="field.key" 
+        [name]="field.key" 
+        [type]="field.type" 
+        class="sui-checkbox" 
+        [(ngModel)]="field.value"
+        (ngModelChange)="isValid(field)" 
+        [placeholder]="field.placeholder" 
+        [disabled]="field.disabled" 
+        [readonly]="field.readonly">
+        
+<input *ngIf="field.type=='file'" 
+        [id]="field.key" 
+        [name]="field.key" 
+        type="file" 
+        [multiple]="field.multiple"
+        [accept]="field.accepts" 
+        (change)="fileChange($event,field)" 
+        [placeholder]="field.placeholder" 
+        [disabled]="field.disabled" 
+        [readonly]="field.readonly">
+<p *ngIf="field.type=='file' && field.value &&  field.controlType == 'image'">
+        <img *ngFor="let item of field.value"   [src]="item.base64" />
+</p>
+<p>
+    <select [id]="field.key" 
+            [name]="field.key" 
+            [(ngModel)]="field.value" 
+             (blur)="isValid(field)" 
+            *ngIf="field.controlType=='dropdown'" 
+            class="sui-select">
+                        <option style="display:none" value="">Choose an option</option>
+                        <option *ngFor="let opt of field.options" [value]="opt.key">{{opt.value}}</option>
+    </select>
+</p>
+<span *ngIf="!validate.valid" class="sui-text-error"> {{validate.errorMessage}} </span>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBase, TextboxField, DropdownField } from '../../sui/sui.util/sui.util.formBase';
+import { FormBase, TextboxField, DropdownField, FileField } from '../../sui/sui.util/sui.util.formBase';
 
 @Component({
   templateUrl: './sample.form.component.html'
@@ -12,6 +12,7 @@ export class SampleFormComponent {
   save(object: any) {
     alert(JSON.stringify(object));
   }
+
 
   createFormFields() {
     this.fields.push(
@@ -33,9 +34,18 @@ export class SampleFormComponent {
         placeholder: 'Email',
         order: 2
       }),
+      new FileField({
+        key: 'file',
+        label: 'File',
+        required: true,
+        accepts: '*',
+        value: '',
+        order: 6
+      }),
       new DropdownField({
         key: 'gender',
         label: 'Gender',
+        required: true,
         options: [
           { key: 'male', value: 'male' },
           { key: 'female', value: 'female' }

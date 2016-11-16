@@ -1,3 +1,9 @@
+export class ImageModel {
+  public alt: string = '';
+  public name: string = '';
+  public base64: string = '';
+  public type: string = '';
+}
 export class FormBase {
   value: any;
   key: string;
@@ -9,6 +15,8 @@ export class FormBase {
   controlType: string;
   type: string;
   placeholder: string;
+  multiple: boolean = false;
+  accepts: string = 'image/*';
   constructor(options: {
     value?: any,
     key?: string,
@@ -19,7 +27,8 @@ export class FormBase {
     order?: number,
     controlType?: string,
     type?: string,
-    placeholder?: string
+    placeholder?: string,
+
   } = {}) {
     this.value = options.value;
     this.key = options.key || '';
@@ -43,6 +52,33 @@ export class TextboxField extends FormBase {
     this.type = options['type'] || '';
   }
 }
+
+export class FileField extends FormBase {
+  controlType = 'file';
+  constructor(options: {
+    multiple?: boolean,
+    accepts?: string,
+    value?: any,
+    key?: string,
+    label?: string,
+    required?: boolean,
+    readonly?: boolean,
+    disabled?: boolean,
+    order?: number
+  } = {}) {
+    super();
+    this.multiple = !!options.multiple;
+    this.accepts = options.accepts || 'image/*';
+    this.key = options.key || '';
+    this.type = 'file';
+    this.label = options.label || '';
+    this.required = !!options.required;
+    this.readonly = !!options.readonly;
+    this.disabled = !!options.disabled;
+    this.order = options.order === undefined ? 1 : options.order;
+  }
+}
+
 
 export class DropdownField extends FormBase {
   controlType = 'dropdown';
