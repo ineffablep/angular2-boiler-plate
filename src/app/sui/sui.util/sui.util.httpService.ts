@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions, Jsonp, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 // Import RxJs required methods
@@ -10,27 +10,37 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class SuiHttpService {
 
-    // Resolve HTTP using the constructor
-    constructor(private http: Http) { }
-
-    get(url: string): Observable<any> {
-        return this.http.get(url)
+    constructor(private http: Http, private jsonp: Jsonp) { }
+    getJsonp(url: string): Observable<any> {
+        let params = new URLSearchParams();
+        params.set('format', 'json');
+        params.set('callback', 'JSONP_CALLBACK');
+        return this.jsonp.get(url, { search: params })
+            .map(response => <string[]> response.json()[1])
+            .catch(this.handleError);
+    }
+    get(url: string,
+        withCredentials: boolean = true,
+        header: Object = {}): Observable<any> {
+        let headers = new Headers(header);
+        let options = new RequestOptions({ headers: headers, withCredentials: withCredentials });
+        return this.http.get(url, options)
             .map(this.extractData)
             .catch(this.handleError);
 
     }
 
-    add(body: Object, url: string,
+    add(body: Object, url: string, withCredentials: boolean = true,
         header: Object = { 'Content-Type': 'application/json' }): Observable<any> {
         let bodyString = JSON.stringify(body);
         let headers = new Headers(header);
-        let options = new RequestOptions({ headers: headers });
+        let options = new RequestOptions({ headers: headers, withCredentials: withCredentials });
         return this.http.post(url, body, options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    update(body: Object, url: string,
+    update(body: Object, url: string, withCredentials: boolean = true,
         header: Object = { 'Content-Type': 'application/json' }): Observable<any> {
         let bodyString = JSON.stringify(body);
         let headers = new Headers(header);
@@ -40,7 +50,7 @@ export class SuiHttpService {
             .catch(this.handleError);
     }
 
-    delete(url: string): Observable<any> {
+    delete(url: string, withCredentials: boolean = true): Observable<any> {
         return this.http.delete(url)
             .map(this.extractData)
             .catch(this.handleError);
@@ -48,9 +58,9 @@ export class SuiHttpService {
 
     private extractData(res: Response) {
         let body = res.json();
-        return body.data || {};
+        return body.data || body;
     }
-    
+
     private handleError(error: Response | any) {
         let errMsg: string;
         if (error instanceof Response) {

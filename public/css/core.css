@@ -178,7 +178,7 @@
   }
 }
 .sui-theme {
-  background: #337ab7 !important;
+  background: linear-gradient(to bottom, #00adee 0%, #0096d1 100%) !important;
   color: #ffffff !important;
 }
 .sui-pointer {
@@ -197,6 +197,13 @@
   position: absolute;
   left: 50%;
   top: 60%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 40%;
+}
+.sui-row-center {
+  position: absolute;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 40%;
   height: 40%;

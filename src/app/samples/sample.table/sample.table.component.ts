@@ -4,7 +4,7 @@ import {
   EnumFieldType,
   EnumEditType
 } from '../../sui/sui.table/sui.table.model';
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 
 @Component({
   templateUrl: './sample.table.component.html'
@@ -18,9 +18,9 @@ export class TableSampleComponent {
     id.identityField = true;
     id.hidden = true;
     let eye = new ColumnModel('eyeColor', 'EyeColor', EnumFieldType.select);
-  //  eye.showInQuickFilter = true;
+    //  eye.showInQuickFilter = true;
     let age = new ColumnModel('age', 'Age', EnumFieldType.number);
-  //  age.showInQuickFilter=true;
+    //  age.showInQuickFilter=true;
     let columns = [
       id,
       new ColumnModel('index', 'Index'),
@@ -453,8 +453,13 @@ export class TableSampleComponent {
     ];
 
     let tble = new TableModel(columns, json);
+    //tble.getUrl = 'http://gbrdcr00017n02:5500/api/qs/kafka/topics/predefined/rubbish';
     tble.editType = EnumEditType.DialogEdit;
-    tble.cssClass = 'sui-table-all sui-padding-large sui-medium';
+    // tble.cssClass = 'sui-table-all sui-padding-large sui-medium';
+    // tble.tableHeader = 'Sample Table';
+    // // tble.style = {'background-color': '#eeeeee'};
+    // tble.headerCssClass = 'sui-padding';
+    // // tble.headerStyle = {'color': '#666666', 'background-color': '#dcdcd'};
     return tble;
   }
 }

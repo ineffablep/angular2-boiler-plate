@@ -84,7 +84,10 @@ export class TableModel {
     public showColumnChooserButton: boolean = true;
     public cssClassColumnChooser: string = 'sui-btn sui-theme';
     public columnChooserText: string = 'Choose Columns';
-
+    public tableHeader: string = '';
+    public cssTableHeader: string = '';
+    public styleTableHeader: Object = {};
+    public pageSizeArray: number[] = [5, 10, 25, 50, 100, 500, 1000];
     public canEdit: boolean = true;
     public canAdd: boolean = true;
     public canDelete: boolean = true;
@@ -111,7 +114,8 @@ export class ColumnModel {
     public canEdit: boolean = true;
     public identityField: boolean = false;
     public selectList: SelectModel[] = [];
-    public filterInputCssClass: string = 'sui-input';
+    public cssfilterRow: string = 'sui-input ';
+    public styleFilterRow: Object = {};
     public autoCreateSelectListFromData: boolean = true;
     public required: boolean = false;
     public showInQuickFilter: boolean = false;

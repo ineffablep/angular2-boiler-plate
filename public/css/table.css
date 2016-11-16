@@ -3,14 +3,23 @@
   border-spacing: 0;
   display: table;
   width: 100%;
+  background-color: #eeeeee;
 }
 .sui-table-container {
   overflow: auto;
+  background-color: #eeeeee;
   height: 600px;
+}
+.sui-pagination-container {
+  margin: 0;
+  height: 60px;
+  padding: 16px;
+  background-color: #eeeeee;
 }
 .sui-table-all {
   border-collapse: collapse;
   border-spacing: 0;
+  background-color: #eeeeee;
   border: 1px solid #dddddd;
   display: table;
   width: 100%;
@@ -19,16 +28,16 @@
   border-bottom: 1px solid #dddddd;
 }
 .sui-table-all tr:nth-child(odd) {
-  background-color: #ffffff;
+  background-color: #eeeeee;
 }
 .sui-table-all tr:nth-child(even) {
-  background-color: #f1f1f1;
+  background-color: #dcdcdc;
 }
 .sui-bordered tr {
   border-bottom: 1px solid #dddddd;
 }
 .sui-striped tbody tr:nth-child(even) {
-  background-color: #f1f1f1;
+  background-color: #dcdcdc;
 }
 .sui-hoverable tbody tr:hover {
   background-color: #cccccc;

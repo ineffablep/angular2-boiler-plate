@@ -11,14 +11,18 @@ import { ValidatiorService, ValidatorModal } from '../sui.util/sui.util.validati
 export class InputComponent {
     @Input() field: FormBase;
     @Output('valid') valid: EventEmitter<any> = new EventEmitter();
-    validate: ValidatorModal = new ValidatorModal();
+    validationMessage: string = '';
+    isValid: boolean = true;
     constructor(private _validator: ValidatiorService) { }
-    isValid(field: FormBase) {
-        let validMessage = this._validator.checkFieldValid(field);
-        if (validMessage.valid) {
+    validateField(field: FormBase) {
+        let validationResponse = this._validator.checkFieldValid(field);
+        if (validationResponse.valid) {
             this.valid.emit(true);
+            this.validationMessage = '';
+        } else {
+            this.validationMessage = validationResponse.errorMessage;
         }
-        this.validate = validMessage;
+        this.isValid = validationResponse.valid;
     }
     fileChange(event: any, field: FormBase) {
         let selectedFiles = event.srcElement.files;
@@ -32,7 +36,7 @@ export class InputComponent {
                 console.log(selectedFiles[i]);
                 image.name = selectedFiles[i].name;
                 image.type = selectedFiles[i].type;
-                reader.onload = function() {
+                reader.onload = function () {
                     image.base64 = reader.result;
                 };
                 reader.readAsDataURL(selectedFiles[i]);
@@ -41,6 +45,6 @@ export class InputComponent {
             field.value = images;
         }
 
-        this.isValid(field);
+        this.validateField(field);
     }
 }

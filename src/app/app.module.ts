@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
+import { HttpModule , JsonpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { SuiModule } from './sui/sui.module';
@@ -18,6 +18,7 @@ import { ModalSampleComponent } from './samples/sample.modal/sample.modal.compon
     BrowserModule,
     CommonModule,
     HttpModule,
+    JsonpModule ,
     RouterModule.forRoot([
       { path: 'welcome', component: WelcomeComponent },
       { path: 'ratingsUi', component: RatingSampleComponent },

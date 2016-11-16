@@ -79,6 +79,32 @@ export class FileField extends FormBase {
   }
 }
 
+export class RadioField extends FormBase {
+  controlType = 'radio';
+  type = 'radio';
+  options: string [];
+  constructor(options: {
+    value?: any,
+    key?: string,
+    label?: string,
+    required?: boolean,
+    readonly?: boolean,
+    disabled?: boolean,
+    order?: number,
+    options?: string[]
+  } = {}) {
+    super();
+    this.key = options.key || '';
+    this.type = 'radio';
+    this.label = options.label || '';
+    this.required = !!options.required;
+    this.readonly = !!options.readonly;
+    this.disabled = !!options.disabled;
+    this.order = options.order === undefined ? 1 : options.order;
+    this.options = options['options'] || [];
+  }
+}
+
 
 export class DropdownField extends FormBase {
   controlType = 'dropdown';

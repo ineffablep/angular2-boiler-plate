@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBase, TextboxField, DropdownField, FileField } from '../../sui/sui.util/sui.util.formBase';
+import { FormBase, TextboxField, DropdownField, FileField, RadioField } from '../../sui/sui.util/sui.util.formBase';
 
 @Component({
     templateUrl: './sample.form.component.html'
@@ -24,22 +24,11 @@ export class SampleFormComponent {
                 placeholder: 'Username',
                 order: 1
             }),
-            new TextboxField({
-                key: 'gender',
-                label: 'Male',
-                type: 'radio',
-                required: true,
-                value: 'male',
-                placeholder: 'Male',
-                order: 11
-            }),
-            new TextboxField({
-                key: 'gender',
-                label: 'Female',
-                type: 'radio',
-                required: true,
-                value: 'female',
-                placeholder: 'Female',
+            new RadioField({
+                key: 'eyeColor',
+                label: 'Eye Color',
+                value: 'Brown',
+                  options: ['Brown' , 'Blue', 'Black' ],
                 order: 12
             }),
             new TextboxField({
@@ -54,7 +43,7 @@ export class SampleFormComponent {
             new FileField({
                 key: 'file',
                 label: 'File',
-                required: true,
+                required: false,
                 accepts: '*',
                 value: '',
                 order: 6

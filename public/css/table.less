@@ -6,15 +6,24 @@
 	border-spacing: 0;
 	display: table;
 	width: 100%;
+	background-color:@table-background-color;
 }
 
 .sui-table-container {
   overflow: auto;
+  background-color:@table-background-color;	
   height: 600px;
+}
+.sui-pagination-container {
+	margin: 0;
+	height: 60px;
+	padding: 16px;
+	background-color:@pagination-container-background-color;	
 }
 .sui-table-all {
 	border-collapse: collapse;
 	border-spacing: 0;
+	background-color:@table-background-color;	
 	border: 1px solid @table-border;
 	display: table;
 	width: 100%;
@@ -86,7 +95,7 @@
 	padding-left: 16px;
 }
 input[type=checkbox].sui-table-check {
-  height: 16px;
+ height: 16px;
  text-align: center; 
  vertical-align: middle; 
  width: 100%
