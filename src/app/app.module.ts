@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpModule , JsonpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-import { SuiModule } from './sui/sui.module';
+import { SuiModule } from 'angular2-simple-ui/sui/sui.module';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome.component';

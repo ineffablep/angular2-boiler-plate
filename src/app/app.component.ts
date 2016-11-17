@@ -1,12 +1,11 @@
 import { INavigationModel,
          NavigationModel,
-         RouteLinkModel } from './sui/sui.navigation/sui.navigation.model';
+         RouteLinkModel } from 'angular2-simple-ui/sui/sui.navigation/sui.navigation.model';
 import { Component } from '@angular/core';
-import '../../public/css/style.css';
+import 'angular2-simple-ui/public/css/style.css';
 @Component({
   selector: 'my-app',
-  templateUrl: './app.component.html',
-  styleUrls:  ['./app.component.css']
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   public nav: INavigationModel;

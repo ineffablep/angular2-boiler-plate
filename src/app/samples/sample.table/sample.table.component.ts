@@ -3,7 +3,7 @@ import {
   ColumnModel,
   EnumFieldType,
   EnumEditType
-} from '../../sui/sui.table/sui.table.model';
+} from 'angular2-simple-ui/sui/sui.table/sui.table.model';
 import { Component, Injectable } from '@angular/core';
 
 @Component({
